@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Pagina Inicial{% endblock %}
+{% block content %}
+<!-- Content -->
+<div id="content" class="flex">
+        
+    <h1>Select document standard to change</h1>
+    
+    <div id="content-main">
+        <ul class="object-tools">
+            <li>
+                <a href="/admin/taskproject/documentstandard/add/" class="addlink">
+                Adicionar Projeto
+                </a>
+            </li>
+        </ul>
+
+        <div class="module" id="changelist">
+            <div class="changelist-form-container">
+
+                <form id="changelist-form" method="post" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="QX6yR3DBmAPo3jIEYftTUmXE2cnTlzoSnNzkNHDBGGHYr49UPe5mhDe8MsmBBy1i">
+
+                <!-- Caixa de seleção - CheckBox -->
+                 <div class="actions">
+                    <label>Action: <select name="action" required>
+                    <option value="" selected>---------</option>
+                    <option value="delete_selected">Editar</option>
+                    <option value="delete_selected">Deletar</option>
+
+                        </select></label><input type="hidden" name="select_across" value="0" class="select-across">
+                        <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+
+                        <span class="action-counter" data-actions-icnt="3">0 of 3 selected</span>
+                </div>
+
+                <!-- Lista de Iten das Tabelas -->
+                <div class="results">
+                    <table id="result_list">
+                    <thead>
+                    <tr>
+                        <th scope="col"  class="action-checkbox-column">
+                            <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
+                            <div class="clear"></div>
+                        </th>
+                        {% for col in cols %}
+                            <th scope="col"  class="column-__str__">
+                                <div class="text"><a href="?o=2">{{ col }}</a></div>
+                                <div class="clear"></div>
+                            </th>
+                        {% endfor %}
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for doc in DocumentStandards %}
+                            <tr>
+                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td><th class="field-project_name"><a href="/admin/taskproject/myproject/1/change/">{{doc.id}}</a></th>
+                                <td class="field-company">{{doc.documment_name}}</td>
+                                <td class="field-comments">{{doc.doc_type}}</td>
+                                <td class="field-update_proj nowrap">{{doc.doc_format}}</td>
+                                <td class="field-update_proj nowrap">{{doc.doc_type_page}}</td>
+                                <td class="field-update_proj nowrap">{{doc.created_sub}}</td>
+                                <td class="field-update_proj nowrap">{{doc.update_sub}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+
+                <p class="paginator">3 document standards</p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

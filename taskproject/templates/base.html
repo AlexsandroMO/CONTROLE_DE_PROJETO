@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>Select document standard to change | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
+ <script src="/admin/jsi18n/"></script>
+
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-taskproject model-documentstandard change-list"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+    <h1 id="site-name"><a href="/admin/">Gerenciador de Projetos</a></h1>
+
+    </div>
+      <div id="user-tools">
+          Welcome,
+          <strong>admin</strong>.
+
+          <a href="/">View site</a> /
+          <a href="/admin/password_change/">Change password</a> /
+          <a href="/admin/logout/">Log out</a>
+          
+      </div>
+    </div>
+<!-- END Header -->
+    
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/admin/taskproject/">Taskproject</a>
+&rsaquo; Document standards
+</div>
+
+<div class="main shifted" id="main">      
+          
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+<nav class="sticky" id="nav-sidebar">
+
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">PROJETOS</a>
+        </caption>
+        
+          <tr class="model-group">
+              <th scope="row"><a href="/admin/auth/group/">Adicionar Projetos</a></th>
+              <td><a href="/admin/auth/group/add/" class="addlink">Add</a></td>
+          </tr>
+        
+          <tr class="model-user">
+              <th scope="row"><a href="/admin/auth/user/">Users</a></th>
+              <td><a href="/admin/auth/user/add/" class="addlink">Editar</a></td>
+          </tr>
+        
+      </table>
+    </div>
+  
+    <div class="app-taskproject module current-app">
+      <table>
+        <caption>
+          <a href="/admin/taskproject/" class="section" title="Models in the Taskproject application">Taskproject</a>
+        </caption>
+        
+          <tr class="model-documentstandard current-model">
+            
+              <th scope="row"><a href="/typeDocuments" aria-current="page">Document standards</a></th>
+
+              <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
+
+          </tr>
+        
+          <tr class="model-myproject">
+            
+              <th scope="row"><a href="/admin/taskproject/myproject/">My projects</a></th>
+               
+              <td><a href="/admin/taskproject/myproject/add/" class="addlink">Add</a></td>
+  
+          </tr>
+        
+          <tr class="model-subject">
+            
+              <th scope="row"><a href="/admin/taskproject/subject/">Subjects</a></th>
+
+              <td><a href="/admin/taskproject/subject/add/" class="addlink">Add</a></td>
+
+          </tr>
+        
+      </table>
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+{% block content %}{% endblock %}
+   
+<br class="clear">
+</div>
+
+<!-- END Content -->
+    <div id="footer"></div>
+    </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>

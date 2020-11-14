@@ -1,11 +1,10 @@
 from django.db import models
 
 
-class MyProject(models.Model):
-
+class MyProject(models.Model): #Títulos de projeto
 
     project_name = models.CharField(max_length=255)
-    company = models.TextField()
+    company = models.CharField(max_length=255)
     comments = models.TextField()
     created_proj = models.DateTimeField(auto_now_add=True)
     update_proj = models.DateTimeField(auto_now=True)
@@ -14,7 +13,7 @@ class MyProject(models.Model):
         return self.project_name
 
 
-class Subject(models.Model):
+class Subject(models.Model): #Disciplinas do Projeto
 
     subject_name = models.CharField(max_length=255)
     created_sub = models.DateTimeField(auto_now_add=True)
@@ -24,7 +23,7 @@ class Subject(models.Model):
         return self.subject_name
 
 
-class DocumentStandard(models.Model):
+class DocumentStandard(models.Model): #Documentos de Projeto
 
     documment_name = models.CharField(max_length=255)
     doc_type = models.CharField(max_length=3)
