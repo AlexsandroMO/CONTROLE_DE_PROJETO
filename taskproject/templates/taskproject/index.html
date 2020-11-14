@@ -2,86 +2,31 @@
 
 {% block title %}Pagina Inicial{% endblock %}
 {% block content %}
-<!-- Content -->
-<div id="content" class="flex">
-        
-    <h1>Select document standard to change</h1>
-    
+
+ 
+ <!-- Content -->
+<div id="content" class="colMS">        
+    <h1>Ambiente de Projetos</h1>
+
     <div id="content-main">
-        <ul class="object-tools">
-            <li>
-                <a href="/admin/taskproject/documentstandard/add/" class="addlink">
-                Adicionar Projeto
-                </a>
-            </li>
-        </ul>
-
-        <div class="module" id="changelist">
-            <div class="changelist-form-container">
-
-                <form id="changelist-form" method="post" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="QX6yR3DBmAPo3jIEYftTUmXE2cnTlzoSnNzkNHDBGGHYr49UPe5mhDe8MsmBBy1i">
-
-                <!-- Caixa de seleção - CheckBox -->
-<!--                 <div class="actions">
-                    <label>Action: <select name="action" required>
-                    <option value="" selected>---------</option>
-                    <option value="delete_selected">Delete selected document standards</option>
-
-                        </select></label><input type="hidden" name="select_across" value="0" class="select-across">
-                        <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
-
-                        <span class="action-counter" data-actions-icnt="3">0 of 3 selected</span>
-                </div>
- -->
-                <!-- Lista de Iten das Tabelas -->
-                <div class="results">
-                    <table id="result_list">
-                    <thead>
-                    <tr>
-                        <th scope="col"  class="action-checkbox-column">
-                            <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                            <div class="clear"></div>
-                        </th>
-                        {% for col in cols %}
-                            <th scope="col"  class="column-__str__">
-                                <div class="text"><a href="?o=1">{{ col }}</a></div>
-                                <div class="clear"></div>
-                            </th>
-                        {% endfor %}
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for projects in MyProjects %}
-                            <tr>
-                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td><th class="field-project_name"><a href="/admin/taskproject/myproject/1/change/">{{projects.id}}</a></th>
-                                <td class="field-company">{{projects.project_name}}</td>
-                                <td class="field-comments">{{projects.company}}</td>
-                                <td class="field-created_proj nowrap">{{projects.comments}}</td>
-                                <td class="field-update_proj nowrap">{{projects.created_proj}}</td>
-                                <td class="field-update_proj nowrap">{{projects.update_proj}}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                    </table>
-                </div>
-
-
-                {% for i in col %}
-                            {{i}}
-                {% endfor %}
-
-                
-
-
-
-                <p class="paginator">3 document standards</p>
-
-            </form>
+        <div class="app-auth module current-app">
+        <table>
+            <caption>
+                <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">Projetos Em Andamento</a>
+            </caption>
+            {% for proj in MyProjects %}
+            <tr class="model-group">
+                <th scope="row"><a href="/admin/auth/group/">{{proj.project_name}}</a></th>
+                <td><a href="/admin/auth/group/add/" class="addlink">Acompanhar</a></td>
+                <td><a href="/admin/auth/group/" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </table>
         </div>
-
     </div>
 </div>
+    
 
+    
 {% endblock %}
 

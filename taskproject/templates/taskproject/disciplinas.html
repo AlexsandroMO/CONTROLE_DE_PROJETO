@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Projetos{% endblock %}
+{% block title %}Disciplinas{% endblock %}
 {% block content %}
 <!-- Content -->
 <div id="content" class="flex">
@@ -11,7 +11,7 @@
         <ul class="object-tools">
             <li>
                 <a href="#" class="addlink">
-                Adicionar Projeto
+                Adicionar Disciplina
                 </a>
             </li>
         </ul>
@@ -41,23 +41,19 @@
                                 <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
                                 <div class="clear"></div>
                             </th>
-                            {% for col in cols %}
-                                <th scope="col"  class="column-__str__">
-                                    <div class="text"><a href="?o=1">{{ col }}</a></div>
-                                    <div class="clear"></div>
-                                </th>
-                            {% endfor %}
+                            <th scope="col"  class="column-__str__">
+                                <div class="text"><a href="?o=1">Disciplina</a></div>
+                                <div class="clear"></div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for projects in MyProjects %}
+                        {% for subject in Subjects %}
                             <tr>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="{{xxx.id}}">{{projects.project_name}}</a></th>
-                                <td class="field-comments">{{projects.company}}</td>
-                                <td class="field-created_proj nowrap">{{projects.comments}}</td>
-                                <td class="field-update_proj nowrap">{{projects.created_proj}}</td>
-                                <td class="field-update_proj nowrap">{{projects.update_proj}}</td>
+                                <th class="field-project_name"><a href="{{xxx.id}}">{{subject.subject_name}}</a></th>
+                                <td class="field-comments">{{subject.created_sub}}</td>
+                                <td class="field-comments">{{subject.update_sub}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

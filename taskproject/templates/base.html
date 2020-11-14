@@ -24,7 +24,12 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
     
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+     <!-- Bootstrap CSS -->
+  <!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+     
 <meta name="robots" content="NONE,NOARCHIVE">
 </head>
 
@@ -33,26 +38,20 @@
 
 <!-- Container -->
 <div id="container">
-
     <!-- Header -->
     <div id="header">
-        <div id="branding">
-        
-    <h1 id="site-name"><a href="/admin/">Gerenciador de Projetos</a></h1>
-
-    </div>
+      <div id="branding">
+        <h1 id="site-name"><a href="/">Gerenciador de Projetos</a></h1>
+      </div>
       <div id="user-tools">
-          Welcome,
-          <strong>admin</strong>.
-
-          <a href="/">View site</a> /
-          <a href="/admin/password_change/">Change password</a> /
-          <a href="/admin/logout/">Log out</a>
-          
+        Welcome,
+        <strong>admin</strong>.
+        <a href="/">View site</a> /
+        <a href="/admin/password_change/">Change password</a> /
+        <a href="/admin/logout/">Log out</a>
       </div>
     </div>
 <!-- END Header -->
-    
 
 <div class="breadcrumbs">
 <a href="/">Home</a>
@@ -65,6 +64,7 @@
 <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
 <nav class="sticky" id="nav-sidebar">
 
+    <!-- Barra laetral -->
     <div class="app-auth module">
       <table>
         <caption>
@@ -72,14 +72,17 @@
         </caption>
         
           <tr class="model-group">
-              <th scope="row"><a href="/admin/auth/group/">Adicionar Projetos</a></th>
-              <td><a href="/admin/auth/group/add/" class="addlink">Add</a></td>
+              <th scope="row"><a href="{% url 'project-list' %}">Configuração de Projetos</a></th>
+              <td><a href="#" class="addlink">Add</a></td>
           </tr>
-        
+          <tr class="model-user">   
+              <th scope="row"><a href="{% url 'documment-type-list' %}">Projetos em Andamento</a></th>
+              <td><a href="#" class="addlink">Editar</a></td>
+          </tr>
           <tr class="model-user">
-              <th scope="row"><a href="/admin/auth/user/">Users</a></th>
-              <td><a href="/admin/auth/user/add/" class="addlink">Editar</a></td>
-          </tr>
+            <th scope="row"><a href="{% url 'Subject-list' %}">Projetos em Finalizados</a></th>
+            <td><a href="#" class="addlink">Editar</a></td>
+        </tr>
         
       </table>
     </div>
@@ -87,31 +90,26 @@
     <div class="app-taskproject module current-app">
       <table>
         <caption>
-          <a href="/admin/taskproject/" class="section" title="Models in the Taskproject application">Taskproject</a>
+          <a href="/admin/taskproject/" class="section" title="Models in the Taskproject application">Ambiente Admin</a>
         </caption>
         
-          <tr class="model-documentstandard current-model">
-            
-              <th scope="row"><a href="/typeDocuments" aria-current="page">Document standards</a></th>
-
+<!--           <tr class="model-documentstandard current-model"> 
+              <th scope="row"><a href="/typeDocuments" aria-current="page">Configurações</a></th>
               <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
-
           </tr>
-        
-          <tr class="model-myproject">
-            
-              <th scope="row"><a href="/admin/taskproject/myproject/">My projects</a></th>
-               
-              <td><a href="/admin/taskproject/myproject/add/" class="addlink">Add</a></td>
-  
+          <tr class="model-documentstandard current-model"> 
+            <th scope="row"><a href="/typeDocuments" aria-current="page">Banco de Dados</a></th>
+            <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
           </tr>
+        -->
         
           <tr class="model-subject">
-            
-              <th scope="row"><a href="/admin/taskproject/subject/">Subjects</a></th>
-
+              <th scope="row"><a href="{% url 'Subject-list' %}">Configurações</a></th>
               <td><a href="/admin/taskproject/subject/add/" class="addlink">Add</a></td>
-
+          </tr>
+          <tr class="model-subject">
+            <th scope="row"><a href="#">Banco de Dados</a></th>
+            <td><a href="/admin/taskproject/subject/add/" class="addlink">Add</a></td>
           </tr>
         
       </table>

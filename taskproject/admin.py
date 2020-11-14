@@ -11,6 +11,11 @@ class DocumentStandardAdmin(admin.ModelAdmin):
     list_display = ('documment_name', 'doc_type','doc_format','doc_type_page','created_sub','update_sub')
 
 
+class SubjectAdmin(admin.ModelAdmin):
+    fields = ('subject_name',)
+    list_display = ('subject_name', 'created_sub','update_sub')
+
+
 admin.site.register(MyProject, MyProjectAdmin)
-admin.site.register(Subject)
+admin.site.register(Subject, SubjectAdmin)
 admin.site.register(DocumentStandard, DocumentStandardAdmin)
