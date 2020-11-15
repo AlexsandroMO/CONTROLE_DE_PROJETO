@@ -38,19 +38,18 @@
                 <div class="results">
                     <table class="w3-table-all" >
                     <thead>
-                    <tr>
-                        <th scope="col"  class="action-checkbox-column">
-                            <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                            <div class="clear"></div>
-                        </th>
-                        {% for col in cols %}
-                            <th scope="col"  class="column-__str__">
-                                <div class="text"><a href="?o=2">{{ col }}</a></div>
+                        <tr>
+                            <th scope="col"  class="action-checkbox-column">
+                                <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
                                 <div class="clear"></div>
                             </th>
-                        {% endfor %}
-
-                    </tr>
+                            {% for col in cols %}
+                                <th scope="col"  class="column-__str__">
+                                    <div class="text"><a href="?o=2">{{ col }}</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                            {% endfor %}
+                        </tr>
                     </thead>
                     <tbody>
                         {% for doc in DocumentStandards %}

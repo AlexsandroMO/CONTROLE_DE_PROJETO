@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import MyProject, Subject, DocumentStandard
+from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee
 
 class MyProjectAdmin(admin.ModelAdmin):
     fields = ('project_name','company','comments')
@@ -19,3 +19,6 @@ class SubjectAdmin(admin.ModelAdmin):
 admin.site.register(MyProject, MyProjectAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(DocumentStandard, DocumentStandardAdmin)
+admin.site.register(Action)
+admin.site.register(StatusDoc)
+admin.site.register(Employee)
