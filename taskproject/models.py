@@ -29,8 +29,9 @@ class DocumentStandard(models.Model): #Documentos de Projeto
     doc_type = models.CharField(max_length=3)
     doc_format = models.CharField(max_length=15)
     doc_type_page = models.CharField(max_length=2)
-    created_sub = models.DateTimeField(auto_now_add=True)
-    update_sub = models.DateTimeField(auto_now=True)
+    created_doc = models.DateTimeField(auto_now_add=True)
+    update_doc = models.DateTimeField(auto_now=True)
+  
 
     def __str__(self):
         return self.doc_type

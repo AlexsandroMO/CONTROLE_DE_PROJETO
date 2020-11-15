@@ -8,7 +8,7 @@ class MyProjectAdmin(admin.ModelAdmin):
 
 class DocumentStandardAdmin(admin.ModelAdmin):
     fields = ('documment_name', 'doc_type','doc_format','doc_type_page')
-    list_display = ('documment_name', 'doc_type','doc_format','doc_type_page','created_sub','update_sub')
+    list_display = ('documment_name', 'doc_type','doc_format','doc_type_page','created_doc','update_doc')
 
 
 class SubjectAdmin(admin.ModelAdmin):

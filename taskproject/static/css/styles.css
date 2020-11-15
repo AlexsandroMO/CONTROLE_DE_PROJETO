@@ -1,4 +1,46 @@
 
 .text{
+    /* background-color: #d1d1d1;
+    background-color: 	#B0E0E6; */
     font-size: 14px;
+    color: red;
+    /* text-align: center; */
+    
 }
+
+#alinha-tables{
+    padding-right: 30px;
+    float: left;
+}
+
+
+
+
+/*Tabelas*/
+table, th, td {
+	border: 1px solid black;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+
+  }
+
+td, th{
+	border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+/* #align-text{
+	text-align: center;
+} */
+
+
+/* 
+.content{
+    background-color: #708090;
+    color: white;
+}
+
+h1{
+    color: white;
+}
+ */

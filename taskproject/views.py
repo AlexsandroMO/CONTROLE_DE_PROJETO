@@ -13,9 +13,10 @@ def hello(request):
 def index(request):
 
     MyProjects = MyProject.objects.all().order_by('project_name')
+    DocumentStandards = DocumentStandard.objects.all().order_by('doc_type') 
     #cols = ['ID', 'NOME DO PROJETO', 'NOME DA EMPRESA','COMENTÁRIOS', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
-    return render(request, 'taskproject/index.html', {'MyProjects': MyProjects})
+    return render(request, 'taskproject/index.html', {'MyProjects': MyProjects, 'DocumentStandards': DocumentStandards})
 
 
 def projectlist(request):
@@ -29,7 +30,7 @@ def projectlist(request):
 
 def documtypelist(request):
     
-    DocumentStandards = DocumentStandard.objects.all().order_by('-doc_type') 
+    DocumentStandards = DocumentStandard.objects.all().order_by('doc_type') 
 
     cols = ['NOME DO DOCUMENTO', 'TIPO DE DOC','FORMATO', 'NÚMERO DE PAG', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 

@@ -8,21 +8,36 @@
 <div id="content" class="colMS">        
     <h1>Ambiente de Projetos</h1>
 
-    <div id="content-main">
-        <div class="app-auth module current-app">
+    <div class="app-auth module current-app" id="alinha-tables">
         <table>
             <caption>
-                <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">Projetos Em Andamento</a>
+                <a href="#" class="section" title="Models in the Authentication and Authorization application">Projetos em Andamento</a>
             </caption>
             {% for proj in MyProjects %}
             <tr class="model-group">
-                <th scope="row"><a href="/admin/auth/group/">{{proj.project_name}}</a></th>
-                <td><a href="/admin/auth/group/add/" class="addlink">Acompanhar</a></td>
-                <td><a href="/admin/auth/group/" class="changelink">Editar</a></td>
+                <th scope="row"><a href="#">{{proj.project_name}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
             </tr>
             {% endfor %}
+        
         </table>
-        </div>
+    </div>
+
+    <div class="app-auth module current-app" >
+        <table>
+            <caption>
+                <a href="#" class="section" title="Models in the Authentication and Authorization application">Documentação Técnica</a>
+            </caption>
+            {% for doc in DocumentStandards %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{doc.doc_type}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
     </div>
 </div>
     
