@@ -66,3 +66,18 @@ class Action(models.Model): #Lista de Acões
   
     def __str__(self):
         return self.action_type
+
+
+class Cotation(models.Model): #Lista de Acões
+
+    proj_name = models.ForeignKey(MyProject, on_delete=models.CASCADE)
+    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    doc_name = models.ForeignKey(DocumentStandard, on_delete=models.CASCADE)
+    qt_page = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
+    qt_doc = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
+    qt_hh = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    created_ct = models.DateTimeField(auto_now_add=True)
+    update_ct = models.DateTimeField(auto_now=True)
+  
+    def __str__(self):
+        return str(self.subject_name)

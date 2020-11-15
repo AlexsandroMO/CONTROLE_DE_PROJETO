@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
-from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee
+from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation
 
 def hello(request):
     return HttpResponse('<h1>Hello!</h1>')
@@ -17,8 +17,9 @@ def index(request):
     Actions = Action.objects.all().order_by('-action_type')
     StatusDocs = StatusDoc.objects.all().order_by('-doc_status')
     Employees = Employee.objects.all().order_by('-emp_name')
+    Cotations = Cotation.objects.all().order_by('-proj_name')
 
-    return render(request, 'taskproject/index.html', {'MyProjects': MyProjects, 'DocumentStandards': DocumentStandards, 'Actions': Actions, 'StatusDocs':StatusDocs, 'Employees':Employees})
+    return render(request, 'taskproject/index.html', {'MyProjects': MyProjects, 'DocumentStandards': DocumentStandards, 'Actions': Actions, 'StatusDocs':StatusDocs, 'Employees':Employees, 'Cotations':Cotations})
 
 
 def projectlist(request):
@@ -67,6 +68,20 @@ def Statuslist(request):
 def Employeelist(request):
     
     Employees = Employee.objects.all().order_by('-emp_name')
-    cols = ['NOME DO CPLABORADOR', 'CARGO', 'REGISTRO', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+    cols = ['NOME DO COLABORADOR', 'CARGO', 'REGISTRO', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/employee.html', {'Employees': Employees, 'cols':cols})
+
+
+def Cotationlist(request):
+    
+
+
+    
+    Cotations = Cotation.objects.all().order_by('-proj_name')
+    DocumentStandards = DocumentStandard.objects.all().order_by('-documment_name')
+    #DocumentStandards = DocumentStandard.objects.get(id=Cotations.id)
+    
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'HH', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO','TEST']
+
+    return render(request, 'taskproject/cotation.html', {'DocumentStandards':DocumentStandards, 'Cotations': Cotations, 'cols':cols})
