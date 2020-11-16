@@ -8,6 +8,8 @@ from django.test import TestCase
 #Apliocações WEB
 
 
+
 #inner join DJANGO
 #https://stackoverflow.com/questions/48128714/how-to-make-an-inner-join-in-django
+
 

@@ -102,3 +102,5 @@ def Cotationlist(request):
     return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols})
 
     #taskproject_documentstandard;
+	
+	
