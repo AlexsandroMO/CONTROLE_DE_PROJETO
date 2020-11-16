@@ -51,10 +51,11 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         {% for cotation in Cotations %}
                             <tr>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="{{xxx.id}}">{{cotation.proj_name}}</a></th>
+                                <th class="field-project_name"><a href="{{xxx.id}}">{{cotation}}</a></th>
                                 <td class="field-comments">{{cotation.subject_name}}</td>
                                 <td class="field-comments">{{cotation.doc_name}}</td>
                                 <td class="field-comments">{{cotation.qt_page}}</td>
@@ -62,18 +63,26 @@
                                 <td class="field-comments">{{cotation.qt_hh}}</td>
                                 <td class="field-comments">{{cotation.created_ct}}</td>
                                 <td class="field-comments">{{cotation.update_ct}}</td>
-                                {% for doc in DocumentStandards %}
-                                    {% if doc.doc_type == cotation.proj_name %}
-                                        <td class="field-comments">{{ doc.documment_name }}
-                                     git 
+                                {% for doc in DocStandards %}
+                                   
+                                    {% if doc.doc_type is cotation.doc_name %}
+                                        <td class="field-comments"> {{doc.documment_name}}</td>
+                                    {% else %}
+                                        <td class="field-comments"> |||||||{{doc.doc_type}}</td>
+                                        <td class="field-comments"> >>>>{{cotation.doc_name}}</td>
+
                                     {% endif %}
 
-                                    {{ cotation.proj_name}} | {{doc.doc_type }}
-                                   
+                                    {{doc.documment_name}}<br>
+                                    {{doc.doc_type}}<br>
+                                    {{cotation.doc_name}}<br>
 
                                 {% endfor %}
-                               
                                 </td>
+
+                                
+
+
                             </tr>
                         {% endfor %}
                     </tbody>

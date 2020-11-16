@@ -5,6 +5,8 @@ from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
 from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation
+import sqlite3
+import pandas as pd
 
 def hello(request):
     return HttpResponse('<h1>Hello!</h1>')
@@ -76,12 +78,27 @@ def Employeelist(request):
 def Cotationlist(request):
     
 
-
-    
     Cotations = Cotation.objects.all().order_by('-proj_name')
-    DocumentStandards = DocumentStandard.objects.all().order_by('-documment_name')
-    #DocumentStandards = DocumentStandard.objects.get(id=Cotations.id)
+    DocStandards = DocumentStandard.objects.all().order_by('doc_type')
+  
+    def read_sql(): #Information Tables Read
+        conn = sqlite3.connect('db.sqlite3')
+        sql_datas = f"""
+                SELECT * FROM taskproject_Cotation;
+        """
+
+        read_db = pd.read_sql_query(sql_datas, conn)
+        conn.close()
+
+        return read_db
+
+
+    #Cotations = read_sql()
+    #print('>>>>>>>>>>>>>>>>', Cotations)
+    
     
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'HH', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO','TEST']
 
-    return render(request, 'taskproject/cotation.html', {'DocumentStandards':DocumentStandards, 'Cotations': Cotations, 'cols':cols})
+    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols})
+
+    #taskproject_documentstandard;

@@ -1,18 +1,18 @@
 {% load static %}
+
 <!DOCTYPE html>
 
 <html lang="en-us" >
 <head>
-<title>Select document standard to change | Django site admin</title>
-
-<!-- CSS Django Admin-->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>Select my project to change | Django site admin</title>
 <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
 
-<link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
-<script src="/static/admin/js/nav_sidebar.js" defer></script>
-<link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
-<script src="/admin/jsi18n/"></script>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
+  
+  <script src="/admin/jsi18n/"></script>
 
 <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
 <script src="/static/admin/js/jquery.init.js"></script>
@@ -23,21 +23,18 @@
 <script src="/static/admin/js/prepopulate.js"></script>
 <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
 
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
-<!-- Bootstrap CSS w3 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
 
-
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-
-<!-- My CSS -->
-<link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
-     
 <meta name="robots" content="NONE,NOARCHIVE">
 </head>
+
+
+<body class=" app-taskproject model-myproject change-list"
+  data-admin-utc-offset="0">
 
 <body class=" app-taskproject model-documentstandard change-list" data-admin-utc-offset="0">
 
