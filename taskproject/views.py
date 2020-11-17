@@ -9,6 +9,7 @@ import sqlite3
 import pandas as pd
 
 def hello(request):
+
     return HttpResponse('<h1>Hello!</h1>')
 
 
@@ -76,31 +77,22 @@ def Employeelist(request):
 
 
 def Cotationlist(request):
-    
 
     Cotations = Cotation.objects.all().order_by('-proj_name')
     DocStandards = DocumentStandard.objects.all().order_by('doc_type')
-  
-    def read_sql(): #Information Tables Read
-        conn = sqlite3.connect('db.sqlite3')
-        sql_datas = f"""
-                SELECT * FROM taskproject_Cotation;
-        """
+    #test = Cotation.objects.all().select_related('doc_name')
 
-        read_db = pd.read_sql_query(sql_datas, conn)
-        conn.close()
+    new_list = Cotation.objects.raw(f'''
+                                    SELECT proj_name_id
+                                    FROM taskproject_cotation
+    ''')
 
-        return read_db
-
-
-    #Cotations = read_sql()
-    #print('>>>>>>>>>>>>>>>>', Cotations)
-    
-    
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'HH', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO','TEST']
 
-    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols})
+    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
 
-    #taskproject_documentstandard;
-	
+
+
+
+
 	

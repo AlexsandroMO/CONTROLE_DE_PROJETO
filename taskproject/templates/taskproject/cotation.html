@@ -63,19 +63,9 @@
                                 <td class="field-comments">{{cotation.qt_hh}}</td>
                                 <td class="field-comments">{{cotation.created_ct}}</td>
                                 <td class="field-comments">{{cotation.update_ct}}</td>
-                                {% for doc in DocStandards %}
-                                   
-                                    {% if doc.doc_type is cotation.doc_name %}
-                                        <td class="field-comments"> {{doc.documment_name}}</td>
-                                    {% else %}
-                                        <td class="field-comments"> |||||||{{doc.doc_type}}</td>
-                                        <td class="field-comments"> >>>>{{cotation.doc_name}}</td>
+                                {% for new in new_list %}
 
-                                    {% endif %}
-
-                                    {{doc.documment_name}}<br>
-                                    {{doc.doc_type}}<br>
-                                    {{cotation.doc_name}}<br>
+                                        <td class="field-comments"> => {{new.doc_name}}</td>
 
                                 {% endfor %}
                                 </td>
