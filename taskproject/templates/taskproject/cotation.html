@@ -52,27 +52,20 @@
                     </thead>
                     <tbody>
 
-                        {% for cotation in Cotations %}
+                        {% for i in new_list %}
                             <tr>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="{{xxx.id}}">{{cotation}}</a></th>
-                                <td class="field-comments">{{cotation.subject_name}}</td>
-                                <td class="field-comments">{{cotation.doc_name}}</td>
-                                <td class="field-comments">{{cotation.qt_page}}</td>
-                                <td class="field-comments">{{cotation.qt_doc}}</td>
-                                <td class="field-comments">{{cotation.qt_hh}}</td>
-                                <td class="field-comments">{{cotation.created_ct}}</td>
-                                <td class="field-comments">{{cotation.update_ct}}</td>
-                                {% for new in new_list %}
-
-                                        <td class="field-comments"> => {{new.doc_name}}</td>
-
-                                {% endfor %}
+                                <th class="field-project_name"><a href="{{xxx.id}}">{{i.1}}</a></th>
+                                <td class="field-comments">{{i.2}}</td>
+                                <td class="field-comments">{{i.3}}</td>
+                                <td class="field-comments">{{i.4}}</td>
+                                <td class="field-comments">{{i.5}}</td>
+                                <td class="field-comments">{{i.6}}</td>
+                                <td class="field-comments">{{i.7}}</td>
+                                <td class="field-comments">{{i.8}}</td>
+                                <td class="field-comments">{{i.9}}</td>
+                                <td class="field-comments">{{i.10}}</td>
                                 </td>
-
-                                
-
-
                             </tr>
                         {% endfor %}
                     </tbody>

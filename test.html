@@ -1,0 +1,134 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block title %}Pagina Inicial{% endblock %}
+{% block content %}
+
+ 
+ <!-- Content -->
+<div id="content" class="colMS">        
+    <h1>Ambiente de Projetos</h1>
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'project-list' %}" class="section" title="Models in the Authentication and Authorization application">Projetos em Andamento</a>
+            </caption>
+            {% for proj in MyProjects %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{proj.project_name}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'documment-type-list' %}" class="section" title="Models in the Authentication and Authorization application">Documentação Técnica</a>
+            </caption>
+            {% for doc in DocumentStandards %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{doc.doc_type}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'subject-list' %}" class="section" title="Models in the Authentication and Authorization application">Disciplinas</a>
+            </caption>
+            {% for doc in DocumentStandards %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{doc.doc_type}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'action-list' %}" class="section" title="Models in the Authentication and Authorization application">Ações do Projeto</a>
+            </caption>
+            {% for action in Actions %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{action.action_type}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'status-list' %}" class="section" title="Models in the Authentication and Authorization application">Status do Projeto</a>
+            </caption>
+            {% for status in StatusDocs %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{status.doc_status}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'employee-list' %}" class="section" title="Models in the Authentication and Authorization application">Colaboradores</a>
+            </caption>
+            {% for employee in Employees %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{employee.emp_name}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+    <div class="app-auth module current-app" id="alinha-tables">
+        <table>
+            <caption>
+                <a href="{% url 'cotation-list' %}" class="section" title="Models in the Authentication and Authorization application">Cotação de Projetos</a>
+            </caption>
+            {% for cotation in Cotations %}
+            <tr class="model-group">
+                <th scope="row"><a href="#">{{cotation.proj_name}}</a></th>
+                <td><a href="#" class="addlink">Acompanhar</a></td>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+
+</div>
+    
+
+    
+{% endblock %}
+

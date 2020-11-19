@@ -14,7 +14,9 @@
 }
 
 
-
+#width-caption{
+    width: 200px;
+}
 
 /*Tabelas*/
 table, th, td {
@@ -28,6 +30,12 @@ td, th{
 	border: 1px solid #dddddd;
     padding: 8px;
 }
+
+
+
+
+
+
 
 /* #align-text{
 	text-align: center;

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     
@@ -13,4 +15,7 @@ urlpatterns = [
     path('status/', views.Statuslist, name='status-list'),
     path('employee/', views.Employeelist, name='employee-list'),
     path('cotation/', views.Cotationlist, name='cotation-list'),
-]
+    path('CreatePL/', views.Create_PL, name='Create-PL'),
+    path('upload/', views.Uploadlists, name='upload-list'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

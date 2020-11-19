@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation
+from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload
 
 class MyProjectAdmin(admin.ModelAdmin):
     fields = ('project_name','company','comments')
@@ -17,10 +17,14 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 class CotationAdmin(admin.ModelAdmin):
-    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh')
-    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','created_ct','update_ct')
-    
+    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_hh','cost_doc')
+    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_hh','cost_doc','created_ct','update_ct')
+     
  
+class UploadAdmin(admin.ModelAdmin):
+    fields = ('arq',)
+    list_display = ('arq', 'update_arq')
+
 admin.site.register(MyProject, MyProjectAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(DocumentStandard, DocumentStandardAdmin)
@@ -28,3 +32,4 @@ admin.site.register(Action)
 admin.site.register(StatusDoc)
 admin.site.register(Employee)
 admin.site.register(Cotation)
+admin.site.register(Upload)

@@ -4,9 +4,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
-from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation
+from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload
 import sqlite3
 import pandas as pd
+
+import codes
 
 def hello(request):
 
@@ -38,7 +40,7 @@ def documtypelist(request):
     
     DocumentStandards = DocumentStandard.objects.all().order_by('doc_type') 
 
-    cols = ['NOME DO DOCUMENTO', 'TIPO DE DOC','FORMATO', 'NÚMERO DE PAG', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+    cols = ['ID','NOME DO DOCUMENTO', 'TIPO DE DOC','FORMATO', 'NÚMERO DE PAG', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
 
@@ -80,19 +82,31 @@ def Cotationlist(request):
 
     Cotations = Cotation.objects.all().order_by('-proj_name')
     DocStandards = DocumentStandard.objects.all().order_by('doc_type')
-    #test = Cotation.objects.all().select_related('doc_name')
 
-    new_list = Cotation.objects.raw(f'''
-                                    SELECT proj_name_id
-                                    FROM taskproject_cotation
-    ''')
+    new_list = []
+    for b in Cotations:
+        for c in DocStandards:
+            if b.doc_name_id == c.id:
+                doc = c.documment_name
 
-    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'HH', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO','TEST']
+        new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
+
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'QT. HH', 'CUSTO HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
-
-
-
-
-
 	
+
+
+def Uploadlists(request):
+    if request.GET.get('arq'):
+        print('entrou')
+
+    Uploads = Upload.objects.all().order_by('-arq')
+
+    return render(request, 'taskproject/upload.html', {'Uploads':Uploads})
+
+
+def Create_PL(request):
+    codes.ronina_carrega_pl()
+
+    return redirect('/')

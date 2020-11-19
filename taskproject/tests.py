@@ -12,4 +12,6 @@ from django.test import TestCase
 #inner join DJANGO
 #https://stackoverflow.com/questions/48128714/how-to-make-an-inner-join-in-django
 
+#https://pt.stackoverflow.com/questions/458410/consulta-de-tabela-associativa-no-django
+
 
