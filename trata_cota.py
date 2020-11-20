@@ -45,8 +45,17 @@ def trata_cotation():
         
         return read_db
 
+    def cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
 
-
+        qsl_datas = f"""
+                    INSERT INTO taskproject_cotation(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,created_ct,update_ct)
+                    VALUES ('{proj_name_id}','{subject_name_id}','{doc_name_id}','{qt_page}','{qt_doc}','{qt_hh}','{cost_hh}','{cost_doc}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
 
     date_today = datetime.today()
 
@@ -71,5 +80,18 @@ def trata_cotation():
     
     new_df = pd.DataFrame(data=list_ids,columns=['proj_name_id','subject_name_id','doc_name_id','qt_page','qt_doc','qt_hh','cost_hh','cost_doc','created_ct','update_ct'])
 
-    return new_df
+    for a in range(len(new_df['proj_name_id'])):
+        proj_name_id = new_df['proj_name_id'].loc[a]
+        subject_name_id = new_df['subject_name_id'].loc[a]
+        doc_name_id = new_df['doc_name_id'].loc[a]
+        qt_page = new_df['qt_page'].loc[a]
+        qt_doc = new_df['qt_doc'].loc[a]
+        qt_hh = new_df['qt_hh'].loc[a]
+        cost_hh = new_df['cost_hh'].loc[a]
+        cost_doc = new_df['cost_doc'].loc[a]
+
+        cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today)
+
+    
+    return 'Feito!'
     

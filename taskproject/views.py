@@ -9,6 +9,7 @@ import sqlite3
 import pandas as pd
 
 import codes
+import trata_cota
 
 def hello(request):
 
@@ -84,14 +85,19 @@ def Cotationlist(request):
     DocStandards = DocumentStandard.objects.all().order_by('doc_type')
 
     new_list = []
+    
     for b in Cotations:
         for c in DocStandards:
             if b.doc_name_id == c.id:
                 doc = c.documment_name
                 doc_type_page = c.doc_type_page
                 doc_format = c.doc_format
+                #print('>>>>>>>>>', b.doc_name_id, c.id, doc, doc_type_page, doc_format)
 
-        new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
+        #Corrigir isso ----------------------
+
+        #new_list.append([doc_type_page,doc_format])
+        #new_list.append([int(b.id),b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
 
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. DOC', 'QT. HH', 'CUSTO HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
@@ -112,3 +118,11 @@ def Create_PL(request):
     codes.ronina_carrega_pl()
 
     return redirect('/')
+
+
+
+def Create_Cotation(request):
+    trata_cota.trata_cotation()
+
+    return redirect('/')
+    

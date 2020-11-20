@@ -16,6 +16,7 @@ urlpatterns = [
     path('employee/', views.Employeelist, name='employee-list'),
     path('cotation/', views.Cotationlist, name='cotation-list'),
     path('CreatePL/', views.Create_PL, name='Create-PL'),
+    path('CreateCota/', views.Create_Cotation, name='Create-cota'),
     path('upload/', views.Uploadlists, name='upload-list'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
