@@ -88,10 +88,12 @@ def Cotationlist(request):
         for c in DocStandards:
             if b.doc_name_id == c.id:
                 doc = c.documment_name
+                doc_type_page = c.doc_type_page
+                doc_format = c.doc_format
 
-        new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
+        new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
 
-    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'QD. FOLHAS', 'QT. DOC', 'QT. HH', 'CUSTO HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. DOC', 'QT. HH', 'CUSTO HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
 	

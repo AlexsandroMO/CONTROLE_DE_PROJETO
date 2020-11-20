@@ -15,3 +15,5 @@ from django.test import TestCase
 #https://pt.stackoverflow.com/questions/458410/consulta-de-tabela-associativa-no-django
 
 
+#Django CRUD
+#https://pythonacademy.com.br/blog/desenvolvimento-web-com-python-e-django-view

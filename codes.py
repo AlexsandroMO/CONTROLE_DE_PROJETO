@@ -4,6 +4,7 @@ import sqlite3
 import pandasql as ps
 from datetime import datetime
 import xlrd
+import trata_cota
 
 def ronina_carrega_pl():
 
@@ -86,6 +87,18 @@ def ronina_carrega_pl():
         conn.commit()
         conn.close()
 
+    def cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_cotation(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,created_ct,update_ct)
+                    VALUES ('{proj_name_id}','{subject_name_id}','{doc_name_id}','{qt_page}','{qt_doc}','{qt_hh}','{cost_hh}','{cost_doc}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
 
     date_today = datetime.today()
 
@@ -94,11 +107,10 @@ def ronina_carrega_pl():
     df_dis = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','DISCIPLINAS')
     df_st = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','STATUS')
     df_ac = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','ACAO')
-    df = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','EMPLOYEES')
+    df_emp = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','EMPLOYEES')
 
+    new_df = trata_cota.trata_cotation()
 
-    
-    
     for a in range(len(df_proj['NOME_PROJETO'])):
         proj_name = df_proj['NOME_PROJETO'].loc[a]
         company = df_proj['EMPRESA'].loc[a]
@@ -133,13 +145,25 @@ def ronina_carrega_pl():
         cria_act(acao, date_today)
 
 
-    for a in range(len(df['FUNCIONARIO'])):
-        func = df['FUNCIONARIO'].loc[a]
-        cargo = df['CARGO'].loc[a]
-        contr = df['CONTRATO'].loc[a]
+    for a in range(len(df_emp['FUNCIONARIO'])):
+        func = df_emp['FUNCIONARIO'].loc[a]
+        cargo = df_emp['CARGO'].loc[a]
+        contr = df_emp['CONTRATO'].loc[a]
 
         cria_func(func, cargo, contr, date_today)
 
+
+    for a in range(len(new_df['proj_name_id'])):
+        proj_name_id = new_df['proj_name_id'].loc[a]
+        subject_name_id = new_df['subject_name_id'].loc[a]
+        doc_name_id = new_df['doc_name_id'].loc[a]
+        qt_page = new_df['qt_page'].loc[a]
+        qt_doc = new_df['qt_doc'].loc[a]
+        qt_hh = new_df['qt_hh'].loc[a]
+        cost_hh = new_df['cost_hh'].loc[a]
+        cost_doc = new_df['cost_doc'].loc[a]
+
+        cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today)
 
 
     print('Feito!')
