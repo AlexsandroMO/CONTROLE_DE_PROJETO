@@ -6,8 +6,22 @@ from datetime import datetime
 import xlrd
 
 def ronina_carrega_pl():
-    print('-------------- entrou!')
-    def cria_user(doc_name, code_doc, format_doc, doc_type, date_today):
+
+    #-------------------------------------------------------
+    def cria_proj(proj_name, company, comments, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_myproject(project_name,company,comments,created_proj,update_proj)
+                    VALUES ('{proj_name}','{company}','{comments}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    def cria_doc(doc_name, code_doc, format_doc, doc_type, date_today):
         conn = sqlite3.connect('db.sqlite3')
         c = conn.cursor()
 
@@ -19,20 +33,113 @@ def ronina_carrega_pl():
         conn.commit()
         conn.close()
 
+
+    def cria_dis(name_dis, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_subject(subject_name, created_sub, update_sub)
+                    VALUES ('{name_dis}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+            
+
+    def cria_st(status, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_statusdoc(doc_status,created_st,update_st)
+                    VALUES ('{status}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    def cria_act(acao, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_action(action_type, created_st, update_st)
+                    VALUES ('{acao}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    def cria_func(func, cargo, contr, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_employee(emp_name,emp_office,emp_contrato,created_emp,update_emp)
+                    VALUES ('{func}','{cargo}','{contr}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
     date_today = datetime.today()
 
-    print('--------------', date_today)
-
-    df = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','MODELO_DOCUMENTO')
-
-    for a in range(len(df['LISTA_DOCUMENTOS'])):
-        doc_name = df['LISTA_DOCUMENTOS'].loc[a]
-        code_doc = df['COD_DOC_TIPO'].loc[a]
-        format_doc = df['FORMATO'].loc[a]
-        doc_type = df['TIPO'].loc[a]
+    df_proj = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','PROJECTS')
+    df_doc = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','MODELO_DOCUMENTO')
+    df_dis = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','DISCIPLINAS')
+    df_st = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','STATUS')
+    df_ac = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','ACAO')
+    df = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','EMPLOYEES')
 
 
-        cria_user(doc_name, code_doc, format_doc, doc_type, date_today)
+    
+    
+    for a in range(len(df_proj['NOME_PROJETO'])):
+        proj_name = df_proj['NOME_PROJETO'].loc[a]
+        company = df_proj['EMPRESA'].loc[a]
+        comments = df_proj['COMENTARIO'].loc[a]
+
+        cria_proj(proj_name, company, comments, date_today)
+
+    for a in range(len(df_doc['LISTA_DOCUMENTOS'])):
+        doc_name = df_doc['LISTA_DOCUMENTOS'].loc[a]
+        code_doc = df_doc['COD_DOC_TIPO'].loc[a]
+        format_doc = df_doc['FORMATO'].loc[a]
+        doc_type = df_doc['TIPO'].loc[a]
+
+        cria_doc(doc_name, code_doc, format_doc, doc_type, date_today)
 
 
-    return 'Feito!'
+    for a in range(len(df_dis['NOME_DISCIPLINA'])):
+        name_dis = df_dis['NOME_DISCIPLINA'].loc[a]
+
+        cria_dis(name_dis, date_today)
+
+
+    for a in range(len(df_st['STATUS'])):
+        status = df_st['STATUS'].loc[a]
+
+        cria_st(status, date_today)
+
+
+    for a in range(len(df_ac['ACAO'])):
+        acao = df_ac['ACAO'].loc[a]
+
+        cria_act(acao, date_today)
+
+
+    for a in range(len(df['FUNCIONARIO'])):
+        func = df['FUNCIONARIO'].loc[a]
+        cargo = df['CARGO'].loc[a]
+        contr = df['CONTRATO'].loc[a]
+
+        cria_func(func, cargo, contr, date_today)
+
+
+
+    print('Feito!')

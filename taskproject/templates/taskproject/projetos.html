@@ -46,12 +46,14 @@
                                     <div class="text"><a href="?o=1">{{ col }}</a></div>
                                     <div class="clear"></div>
                                 </th>
+                                
                             {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
                         {% for projects in MyProjects %}
                             <tr>
+                                <td class="field-comments">{{projects.id}}</td>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
                                 <th class="field-project_name"><a href="{{xxx.id}}">{{projects.project_name}}</a></th>
                                 <td class="field-comments">{{projects.company}}</td>

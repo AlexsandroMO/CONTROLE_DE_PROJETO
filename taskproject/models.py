@@ -82,7 +82,7 @@ class Cotation(models.Model): #Lista de Acões
     update_ct = models.DateTimeField(auto_now=True)
   
     def __str__(self):
-        return str(self.subject_name)
+        return str(self.proj_name)
 
 
 class Upload(models.Model): #Upload de arquivos
