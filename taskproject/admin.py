@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload
+from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
 
 class MyProjectAdmin(admin.ModelAdmin):
     fields = ('project_name','company','comments')
@@ -25,6 +25,13 @@ class UploadAdmin(admin.ModelAdmin):
     fields = ('arq',)
     list_display = ('arq', 'update_arq')
 
+
+class ProjectValueAdmin(admin.ModelAdmin):
+    fields = ('cost_by_hh','cost_by_doc','cost_by_A1')
+    list_display = ('cost_by_hh','cost_by_doc','cost_by_A1')
+
+
+
 admin.site.register(MyProject, MyProjectAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(DocumentStandard, DocumentStandardAdmin)
@@ -33,3 +40,4 @@ admin.site.register(StatusDoc)
 admin.site.register(Employee)
 admin.site.register(Cotation, CotationAdmin)
 admin.site.register(Upload)
+admin.site.register(ProjectValue, ProjectValueAdmin)

@@ -95,15 +95,49 @@
                 Carregar Planilhas
             </caption>
             <th scope="row"><a href="#" onclick="MessagesCarga()" id="call-pl">Carga Geral</a></th>
-            
-        
             <td><a href="#" onclick=" MessagesCotation()" id="call-cota">Carga Cotation</a></td>
+            
+        </table>
+
+        <table>
+            <h3>Tipo de Orçamento</h3>
+            <th scope="row">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> By HH
+                    </label>
+                </div>
+            </th>
+            <th scope="row">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> By Doc
+                    </label>
+                </div>
+            </th>
+            <th scope="row">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> By A1
+                    </label>
+                </div>
+            </th>
         </table>
     </div>
 
 </div>
     
 
+
+<div class="app-auth module current-app" id="alinha-tables">
+    <table>
+        <caption id="width-caption">
+            <a href="{% url 'admin:index' %}" class="section" title="Models in the Authentication and Authorization application">Tipo de Cotação</a>
+        </caption>
+        <th scope="row"><a href="{%url 'admin:index'%}taskproject/upload">Acessar</a></th>
+        <td><a href="#" class="changelink">Editar</a></td>
+    </table>
+</div>
     
 {% endblock %}
 
