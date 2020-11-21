@@ -45,13 +45,13 @@ def trata_cotation():
         
         return read_db
 
-    def cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today):
+    def cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_h,cost_doc,date_today):
         conn = sqlite3.connect('db.sqlite3')
         c = conn.cursor()
 
         qsl_datas = f"""
-                    INSERT INTO taskproject_cotation(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,created_ct,update_ct)
-                    VALUES ('{proj_name_id}','{subject_name_id}','{doc_name_id}','{qt_page}','{qt_doc}','{qt_hh}','{cost_hh}','{cost_doc}','{date_today}','{date_today}');
+                    INSERT INTO taskproject_cotation(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_doc,created_ct,update_ct)
+                    VALUES ('{proj_name_id}','{subject_name_id}','{doc_name_id}','{qt_page}','{qt_doc}','{qt_hh}','{cost_doc}','{date_today}','{date_today}');
                     """
         c.execute(qsl_datas)
         conn.commit()
@@ -75,10 +75,10 @@ def trata_cotation():
             if read_sql_doc()['doc_type'].loc[c] == df_cota['COD_DOC_TIPO'].loc[i]:
                 C = read_sql_doc()['id'].loc[c]
 
-        list_ids.append([A, B, C,df_cota['QT_FOLHA'].loc[i], df_cota['QT_DOC'].loc[i],df_cota['QT_HH'].loc[i], df_cota['CUSTO_HH'].loc[i], df_cota['CUSTO_DOC'].loc[i], date_today, date_today])
+        list_ids.append([A, B, C,df_cota['QT_FOLHA'].loc[i], df_cota['QT_DOC'].loc[i],df_cota['QT_HH'].loc[i], df_cota['CUSTO_DOC'].loc[i], date_today, date_today])
             
     
-    new_df = pd.DataFrame(data=list_ids,columns=['proj_name_id','subject_name_id','doc_name_id','qt_page','qt_doc','qt_hh','cost_hh','cost_doc','created_ct','update_ct'])
+    new_df = pd.DataFrame(data=list_ids,columns=['proj_name_id','subject_name_id','doc_name_id','qt_page','qt_doc','qt_hh','cost_doc','created_ct','update_ct'])
 
     for a in range(len(new_df['proj_name_id'])):
         proj_name_id = new_df['proj_name_id'].loc[a]
@@ -87,10 +87,10 @@ def trata_cotation():
         qt_page = new_df['qt_page'].loc[a]
         qt_doc = new_df['qt_doc'].loc[a]
         qt_hh = new_df['qt_hh'].loc[a]
-        cost_hh = 100 * qt_hh
+        #cost_hh = 100 * qt_hh
         cost_doc = 1000 * qt_doc
 
-        cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today)
+        cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_doc,date_today)
 
     
     return 'Feito!'

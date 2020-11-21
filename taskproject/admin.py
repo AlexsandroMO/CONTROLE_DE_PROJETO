@@ -17,8 +17,8 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 class CotationAdmin(admin.ModelAdmin):
-    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_hh','cost_doc')
-    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_hh','cost_doc','created_ct','update_ct')
+    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_doc')
+    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_doc','created_ct','update_ct')
      
  
 class UploadAdmin(admin.ModelAdmin):

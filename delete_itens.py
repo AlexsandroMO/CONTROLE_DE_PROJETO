@@ -102,8 +102,6 @@ def delete_befor():
 
     
 
-
-
 def delete_cotation():
     #------------------------------------------------
     def read_cota():

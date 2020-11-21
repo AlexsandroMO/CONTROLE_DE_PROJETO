@@ -76,7 +76,6 @@ class Cotation(models.Model): #Lista de Acões
     qt_page = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
     qt_doc = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
     qt_hh = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
-    cost_hh = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     cost_doc = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     created_ct = models.DateTimeField(auto_now_add=True)
     update_ct = models.DateTimeField(auto_now=True)
