@@ -10,6 +10,7 @@ import pandas as pd
 
 import codes
 import trata_cota
+import delete_itens
 
 def hello(request):
 
@@ -92,12 +93,9 @@ def Cotationlist(request):
                 doc = c.documment_name
                 doc_type_page = c.doc_type_page
                 doc_format = c.doc_format
-                #print('>>>>>>>>>', b.doc_name_id, c.id, doc, doc_type_page, doc_format)
-
-        #Corrigir isso ----------------------
-
-        #new_list.append([doc_type_page,doc_format])
-        #new_list.append([int(b.id),b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
+                print('>>>>>>>>>', doc, doc_type_page, doc_format)
+                #new_list.append([doc, doc_type_page, doc_format])
+                new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_hh,b.cost_doc,b.update_ct])
 
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. DOC', 'QT. HH', 'CUSTO HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
@@ -115,6 +113,39 @@ def Uploadlists(request):
 
 
 def Create_PL(request):
+    # read_all[0] = MyProject
+    # read_all[1] = Subject
+    # read_all[2] = DocumentStandard
+    # read_all[3] = Employee
+    # read_all[4] = StatusDoc
+    # read_all[5] = Action
+
+    read_all = delete_itens.delete_befor()
+
+    for id in read_all[0]:
+        proj = get_object_or_404(MyProject, pk=id)
+        proj.delete()
+
+    for id in read_all[1]:
+        sub = get_object_or_404(Subject, pk=id)
+        sub.delete()
+
+    for id in read_all[2]:
+        doc = get_object_or_404(DocumentStandard, pk=id)
+        doc.delete()
+
+    for id in read_all[3]:
+        emp = get_object_or_404(Employee, pk=id)
+        emp.delete()
+
+    for id in read_all[4]:
+        st = get_object_or_404(StatusDoc, pk=id)
+        st.delete()
+
+    for id in read_all[5]:
+        ac = get_object_or_404(Action, pk=id)
+        ac.delete()
+
     codes.ronina_carrega_pl()
 
     return redirect('/')
@@ -122,6 +153,13 @@ def Create_PL(request):
 
 
 def Create_Cotation(request):
+
+    read_cota = delete_itens.delete_cotation()
+
+    for id in read_cota:
+        cota = get_object_or_404(Cotation, pk=id)
+        cota.delete()
+
     trata_cota.trata_cotation()
 
     return redirect('/')

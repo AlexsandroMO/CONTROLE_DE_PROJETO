@@ -87,8 +87,8 @@ def trata_cotation():
         qt_page = new_df['qt_page'].loc[a]
         qt_doc = new_df['qt_doc'].loc[a]
         qt_hh = new_df['qt_hh'].loc[a]
-        cost_hh = new_df['cost_hh'].loc[a]
-        cost_doc = new_df['cost_doc'].loc[a]
+        cost_hh = 100 * qt_hh
+        cost_doc = 1000 * qt_doc
 
         cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_hh,cost_doc,date_today)
 

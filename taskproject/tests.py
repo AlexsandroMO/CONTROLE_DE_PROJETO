@@ -17,3 +17,5 @@ from django.test import TestCase
 
 #Django CRUD
 #https://pythonacademy.com.br/blog/desenvolvimento-web-com-python-e-django-view
+
+
