@@ -5,7 +5,7 @@ from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
 
-from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload
+from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
 import sqlite3
 import pandas as pd
 
@@ -155,40 +155,30 @@ def Create_PL(request):
 
 def Create_Cotation(request):
 
-    print('xxxxxxxxxx',request.GET.get('option1'))
-    
-    if request.method == 'POST':
-        print('-------- Eita!!!!!!!xxxxx')
+    cost = ProjectValue.objects.all()
+    cost_proj = []
+    for a in cost:
+        cost_proj.append([a.cost_by_hh,a.cost_by_doc,a.cost_by_A1])
 
-    if request.method == 'POST':
-        resultcotation = request.form
-        var_modeda = resultcotation['cota-radio']
-
-        print('>>>>>>>>>>>>',var_modeda)
-    #print('---------',request.GET.get('option_cota')[0])
-    
     if request.GET.get('cota-radio'):
-        print('entrou', request.GET.get('cota-radio'))
+        result = request.GET.get('cota-radio')
+        if result == 'option1':
+            cost_type = result
 
+        if result == 'option2':
+            cost_type = result
 
+        if result == 'option3':
+            cost_type = result
 
+        read_cota = delete_itens.delete_cotation()
 
+        for id in read_cota:
+            cota = get_object_or_404(Cotation, pk=id)
+            cota.delete()
 
-    #radio = request.GET.get('option_cota')
-    #print('>>>>>>>>>>>>>>>', radio)
+        trata_cota.trata_cotation(cost_type, cost_proj)
 
-    # if request.GET.get('option_cota'):
-    #     print('----------------- entrou mesmo')
-
-    ''' read_cota = delete_itens.delete_cotation()
-
-    for id in read_cota:
-        cota = get_object_or_404(Cotation, pk=id)
-        cota.delete()
-
-    trata_cota.trata_cotation()
-    '''
-
-    #return redirect('/')
-    return render(request, 'taskproject/index.html')
+    return redirect('/')
+    #return render(request, 'taskproject/index.html')
 

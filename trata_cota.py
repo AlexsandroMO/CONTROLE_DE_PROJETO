@@ -8,7 +8,7 @@ from datetime import datetime
 
    #Trata Cotation lista
     #-----------------------------------
-def trata_cotation():
+def trata_cotation(cost_type, cost_proj):
 
     df_cota = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','COTATION_DOC')
 
@@ -88,8 +88,15 @@ def trata_cotation():
         qt_doc = new_df['qt_doc'].loc[a]
         qt_hh = new_df['qt_hh'].loc[a]
         #cost_hh = 100 * qt_hh
-        cost_doc = 1000 * qt_doc
+        if cost_type == 'option1':
+            cost_doc = cost_proj[0] * qt_hh
 
+        elif cost_type == 'option2':
+            cost_doc = cost_proj[1] * qt_doc
+
+        elif cost_type == 'option3':
+            cost_doc = cost_proj[2] * qt_page
+   
         cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_doc,date_today)
 
     

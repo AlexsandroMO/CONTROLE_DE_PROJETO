@@ -36,9 +36,13 @@ td, th{
 }
 
 
-.bt{
-    padding: 0px;
-    border-collapse: 0;
+#bt{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    border: 0px solid #4CAF50;
+
 }
 
 
