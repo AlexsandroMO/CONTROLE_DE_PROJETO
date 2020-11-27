@@ -9,6 +9,8 @@ from datetime import datetime
    #Trata Cotation lista
     #-----------------------------------
 def trata_cotation(cost_type, cost_proj):
+    
+    print('>>>>>>>>>>>>', cost_type, cost_proj)
 
     df_cota = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','COTATION_DOC')
 

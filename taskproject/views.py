@@ -6,6 +6,8 @@ from django.http import HttpResponse
 #from django.contrib import messages
 
 from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
+from decimal import Decimal
+
 import sqlite3
 import pandas as pd
 
@@ -158,18 +160,12 @@ def Create_Cotation(request):
     cost = ProjectValue.objects.all()
     cost_proj = []
     for a in cost:
-        cost_proj.append([a.cost_by_hh,a.cost_by_doc,a.cost_by_A1])
+        cost_proj.append([Decimal(a.cost_by_hh),Decimal(a.cost_by_doc),Decimal(a.cost_by_A1)])
+
+    cost_proj = cost_proj[0]
 
     if request.GET.get('cota-radio'):
-        result = request.GET.get('cota-radio')
-        if result == 'option1':
-            cost_type = result
-
-        if result == 'option2':
-            cost_type = result
-
-        if result == 'option3':
-            cost_type = result
+        cost_type = request.GET.get('cota-radio')
 
         read_cota = delete_itens.delete_cotation()
 

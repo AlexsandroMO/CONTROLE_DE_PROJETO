@@ -51,3 +51,16 @@ function MessagesCotation(){
 
 }
 
+document.getElementById('cota_show').style.display = 'none';
+
+function Mudarestado(el) {
+    
+    let display = document.getElementById(el).style.display;
+
+    if(display == "none")
+        document.getElementById(el).style.display = 'block';
+    else
+        document.getElementById(el).style.display = 'none';
+}
+
+
