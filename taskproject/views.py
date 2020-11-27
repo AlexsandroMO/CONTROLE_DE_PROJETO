@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
+
 from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload
 import sqlite3
 import pandas as pd
@@ -154,13 +155,40 @@ def Create_PL(request):
 
 def Create_Cotation(request):
 
-    read_cota = delete_itens.delete_cotation()
+    print('xxxxxxxxxx',request.GET.get('option1'))
+    
+    if request.method == 'POST':
+        print('-------- Eita!!!!!!!xxxxx')
+
+    if request.method == 'POST':
+        resultcotation = request.form
+        var_modeda = resultcotation['cota-radio']
+
+        print('>>>>>>>>>>>>',var_modeda)
+    #print('---------',request.GET.get('option_cota')[0])
+    
+    if request.GET.get('cota-radio'):
+        print('entrou', request.GET.get('cota-radio'))
+
+
+
+
+
+    #radio = request.GET.get('option_cota')
+    #print('>>>>>>>>>>>>>>>', radio)
+
+    # if request.GET.get('option_cota'):
+    #     print('----------------- entrou mesmo')
+
+    ''' read_cota = delete_itens.delete_cotation()
 
     for id in read_cota:
         cota = get_object_or_404(Cotation, pk=id)
         cota.delete()
 
     trata_cota.trata_cotation()
+    '''
 
-    return redirect('/')
-    
+    #return redirect('/')
+    return render(request, 'taskproject/index.html')
+

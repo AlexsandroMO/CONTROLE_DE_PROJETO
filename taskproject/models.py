@@ -100,3 +100,4 @@ class ProjectValue(models.Model): #Upload de arquivos
 
     def __str__(self):
         return str(self.cost_by_hh)
+

@@ -15,7 +15,11 @@
 
 
 #width-caption{
-    width: 200px;
+    width: 250px;
+}
+
+#caption-2{
+    color: red;
 }
 
 /*Tabelas*/
@@ -31,6 +35,11 @@ td, th{
     padding: 8px;
 }
 
+
+.bt{
+    padding: 0px;
+    border-collapse: 0;
+}
 
 
 

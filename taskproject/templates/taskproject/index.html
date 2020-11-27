@@ -91,43 +91,45 @@
 
     <div class="app-auth module current-app" id="alinha-tables">
         <table>
+            <form action="{% url 'Create-cota' %}" method="get">
             <caption id="width-caption">
                 Carregar Planilhas
             </caption>
             <th scope="row"><a href="#" onclick="MessagesCarga()" id="call-pl">Carga Geral</a></th>
-            <td><a href="#" onclick=" MessagesCotation()" id="call-cota">Carga Cotation</a></td>
-            
+            <!-- <td><a href="{% url 'Create-cota' %}" onclick="MessagesCotation()" id="call-cota">Carga Cotation</a></td> -->
+            <td><button class="w3-btn w3-white w3-border w3-border-green w3-round-xlarge" type="submit" id="chama-cota" name="cota">Tipo de Orçamento</button></td>
+  
         </table>
 
+        <h3>Tipo de Orçamento</h3>
+        
         <table>
-            <h3>Tipo de Orçamento</h3>
-            <th scope="row">
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> By HH
-                    </label>
-                </div>
-            </th>
-            <th scope="row">
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> By Doc
-                    </label>
-                </div>
-            </th>
-            <th scope="row">
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> By A1
-                    </label>
-                </div>
-            </th>
+            <caption id="width-caption">
+                    <th scope="row">
+                        <div class="radio">
+                            <input type="radio" name="cota-radio" id="optionsRadiosBoa" value="option1"> <!-- checked> -->
+                            <label for="optionsRadiosBoa">HH</label>
+                        </div>
+                    </th>
+                    <th scope="row">
+                     
+                        <div class="radio">
+                            <input type="radio" name="cota-radio" id="optionsRadiosBoa" value="option2">
+                            <label for="optionsRadiosBoa">DOC</label>
+                        </div>
+                    </th>
+                    <th scope="row">
+                        <div class="radio">
+                            <input type="radio" name="cota-radio" id="optionsRadiosBoa" value="option3">
+                            <label for="optionsRadiosBoa">A1</label>
+                        </div>
+
+                    </th>
+
+                </form>
+        </caption>
         </table>
     </div>
-
-</div>
-    
-
 
 <div class="app-auth module current-app" id="alinha-tables">
     <table>

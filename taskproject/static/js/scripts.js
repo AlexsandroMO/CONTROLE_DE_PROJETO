@@ -14,7 +14,7 @@ function MessagesCarga(){
         alert("Atualização de carga será realizada.");
         setTimeout(function() {
         
-            window.location.href = `http://127.0.0.1:8000/CreatePL/`
+            window.location.href = `http://127.0.0.1:8000/CreatePL/?xxxxxx`
         }, 1000);
 
     }
@@ -31,8 +31,9 @@ function MessagesCarga(){
 function MessagesCotation(){
 
     let confirmation = confirm('[Alerta!] - Deseja Realmente Carregar Cotação');
-    let id_href = document.getElementById('call-cota')
+    let id_href = document.getElementsByTagName('radio')
     console.log(id_href)
+    alert("-------", id_href);
 
 
     if (confirmation == true){

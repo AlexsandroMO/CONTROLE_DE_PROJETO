@@ -1,6 +1,7 @@
 from django.contrib import admin
 from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
 
+
 class MyProjectAdmin(admin.ModelAdmin):
     fields = ('project_name','company','comments')
     list_display = ('project_name','company','comments','created_proj','update_proj')
@@ -29,7 +30,6 @@ class UploadAdmin(admin.ModelAdmin):
 class ProjectValueAdmin(admin.ModelAdmin):
     fields = ('cost_by_hh','cost_by_doc','cost_by_A1')
     list_display = ('cost_by_hh','cost_by_doc','cost_by_A1')
-
 
 
 admin.site.register(MyProject, MyProjectAdmin)
