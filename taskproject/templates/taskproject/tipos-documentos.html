@@ -10,39 +10,40 @@
     <div id="content-main">
         <ul class="object-tools">
             <li>
-                <a href="#" class="addlink">
+                <a href="{%url 'admin:index'%}taskproject/documentstandard/add/" class="addlink">
                 Adicionar Tipo de Documento
                 </a>
             </li>
+  
         </ul>
 
         <div class="module" id="changelist">
             <div class="changelist-form-container">
 
-                <form id="changelist-form" method="post" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="QX6yR3DBmAPo3jIEYftTUmXE2cnTlzoSnNzkNHDBGGHYr49UPe5mhDe8MsmBBy1i">
+                <form action="{% url 'create-LD' %}" method="GET" id="changelist-form" novalidate> <!--  -->
+                    <input type="hidden" name="_selected_action" value="xxx">
 
                 <!-- Caixa de seleção - CheckBox -->
                  <div class="actions">
                     <label>Action: <select name="action" required>
                     <option value="" selected>---------</option>
-                    <option value="delete_selected">Editar</option>
+                    <option value="edit_selected">Editar</option>
                     <option value="delete_selected">Deletar</option>
 
                         </select></label><input type="hidden" name="select_across" value="0" class="select-across">
-                        <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+                        <button type="submit" class="button" title="Run the selected action" name="index" value="0" >Go</button> <!--onclick="SendListCheck()"-->
 
                         <span class="action-counter" data-actions-icnt="3">0 of 3 selected</span>
                 </div>
 
                 <!-- Lista de Iten das Tabelas -->
                 <div class="results">
-
                     <div class="w3-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                        <tr>
+                        <tr name="selected">
                             <th scope="col"  class="action-checkbox-column">
-                                <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
+                                <div class="text"><span><input type="checkbox" name="_selected" id="action-toggle"></span></div>
                                 <div class="clear"></div>
                             </th>
                             {% for col in cols %}
@@ -54,9 +55,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% csrf_token %}
                         {% for doc in DocumentStandards %}
                             <tr>
-                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td><th class="field-project_name"><a href="xxx.id">{{doc.documment_name}}</a></th>
+                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="{{doc.id}}" class="action-select" id="selected"></td><th class="field-project_name"><a href="xxx.id">{{doc.documment_name}}</a></th>
                                 <td class="field-comments" id="align-text">{{doc.doc_type}}</td>
                                 <td class="field-update_proj nowrap">{{doc.doc_format}}</td>
                                 <td class="field-update_proj nowrap">{{doc.doc_type_page}}</td>
@@ -68,10 +70,11 @@
                     </table>
                     </div>
                 </div>
-
                 <p class="paginator">3 document standards</p>
 
             </form>
+        </form>
+
         </div>
 
     </div>

@@ -34,7 +34,7 @@ def index(request):
 
 def projectlist(request):
 
-    MyProjects = MyProject.objects.all().order_by('project_name')
+    MyProjects = MyProject.objects.all().order_by('-project_name')
     cols = ['NOME DO PROJETO', 'NOME DA EMPRESA','COMENTÁRIOS', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/projetos.html', {'MyProjects': MyProjects, 'cols':cols})
@@ -136,6 +136,39 @@ def Create_PL(request):
     codes.rotina_carrega_pl()
 
     return redirect('/')
+
+
+def Create_LD(request):
+
+    print('>>>>>>>>>>>  Entrou LD  <<<<<<<<<<<<<<')
+
+    '''
+    if '_selected_action' in request.POST: #verifica se _selected_action foi enviado na requisição
+        variavel = request.POST['_selected_action']
+        print('-----------SELECTED:::: ', variavel)'''
+
+    if request.GET.get('_selected_action'):
+        print('----------------------entrou', request.GET.get('_selected_action'))
+
+        for a in request.GET.get('_selected_action'):
+            print(a)
+
+    if request.GET.get('action'):
+        print('----------------------entrou action :', request.GET.get('action'))
+
+
+    if request.GET.get('_selected'):
+        print('----------------------entrou _selected :', request.GET.get('_selected'))
+
+ 
+    DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
+
+    cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+
+    return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
+    #return redirect('/')
+
+
 
 
 

@@ -64,3 +64,23 @@ function Mudarestado(el) {
 }
 
 
+
+function SendListCheck() {
+
+    //let checked = document.getElementById('selected')
+    let checked = document.getElementsByName('_selected_action').value
+    console.log(checked)
+
+
+    for (i=0;i<length(checked);i++){
+        alert(i)
+    }
+
+    /*    setTimeout(function() {
+        
+        window.location.href = `http://127.0.0.1:8000/createLD`
+    }, 1000); */
+    
+    
+
+}
