@@ -1,11 +1,21 @@
 from django.contrib import admin
-from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
+from . models import MyProject, Subject, DocumentStandard, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue, PageT, DocT
 
 
 class MyProjectAdmin(admin.ModelAdmin):
     fields = ('project_name','company','comments')
     list_display = ('project_name','company','comments','created_proj','update_proj')
     
+
+class PageTAdmin(admin.ModelAdmin):
+    fields = ('name_page',)
+    list_display = ('name_page','created_pt','update_pt')
+
+
+class DocTAdmin(admin.ModelAdmin):
+    fields = ('name_doc',)
+    list_display = ('name_doc','created_dt','update_dt')
+
 
 class DocumentStandardAdmin(admin.ModelAdmin):
     fields = ('documment_name', 'doc_type','doc_format','doc_type_page')
@@ -18,8 +28,8 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 class CotationAdmin(admin.ModelAdmin):
-    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_doc')
-    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_doc', 'qt_hh','cost_doc','created_ct','update_ct')
+    fields = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_hh','cost_doc') #, 'qt_doc'
+    list_display = ('proj_name', 'subject_name', 'doc_name', 'qt_page', 'qt_hh','cost_doc','created_ct','update_ct') #'qt_doc', 
      
  
 class UploadAdmin(admin.ModelAdmin):
@@ -41,3 +51,5 @@ admin.site.register(Employee)
 admin.site.register(Cotation, CotationAdmin)
 admin.site.register(Upload)
 admin.site.register(ProjectValue, ProjectValueAdmin)
+admin.site.register(PageT, PageTAdmin)
+admin.site.register(DocT, DocTAdmin)

@@ -19,6 +19,8 @@ from django.test import TestCase
 #https://pythonacademy.com.br/blog/desenvolvimento-web-com-python-e-django-view
 
 
+#para carregar planilhas digitar http://127.0.0.1:8000/CreatePL no navegador direto e zerar o db
+
 """ class ProjectValue(models.Model): #Upload de arquivos
     cost_hh = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     cost_doc = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)

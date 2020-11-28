@@ -14,7 +14,7 @@ function MessagesCarga(){
         alert("Atualização de carga será realizada.");
         setTimeout(function() {
         
-            window.location.href = `http://127.0.0.1:8000/CreatePL/?xxxxxx`
+            window.location.href = 'http://127.0.0.1:8000/CreatePL'
         }, 1000);
 
     }
@@ -40,7 +40,7 @@ function MessagesCotation(){
         alert("Atualização de carga será realizada.");
         setTimeout(function() {
         
-            window.location.href = `http://127.0.0.1:8000/CreateCota/`
+            window.location.href = 'http://127.0.0.1:8000/CreateCota'
         }, 1000);
 
     }

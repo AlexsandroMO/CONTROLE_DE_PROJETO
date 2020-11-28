@@ -23,17 +23,38 @@ class Subject(models.Model): #Disciplinas do Projeto
         return self.subject_name
 
 
+
+class PageT(models.Model): #Lista de Acões
+
+    name_page = models.CharField(max_length=3)
+    created_pt = models.DateTimeField(auto_now_add=True)
+    update_pt = models.DateTimeField(auto_now=True)
+  
+    def __str__(self):
+        return self.name_page
+
+
+class DocT(models.Model): #Lista de Acões
+
+    name_doc = models.CharField(max_length=3)
+    created_dt = models.DateTimeField(auto_now_add=True)
+    update_dt = models.DateTimeField(auto_now=True)
+  
+    def __str__(self):
+        return self.name_doc
+
+
 class DocumentStandard(models.Model): #Documentos de Projeto
 
     documment_name = models.CharField(max_length=255)
-    doc_type = models.CharField(max_length=3)
+    doc_type = models.ForeignKey(DocT, on_delete=models.CASCADE)
     doc_format = models.CharField(max_length=15)
-    doc_type_page = models.CharField(max_length=2)
+    doc_type_page = models.ForeignKey(PageT, on_delete=models.CASCADE)
     created_doc = models.DateTimeField(auto_now_add=True)
     update_doc = models.DateTimeField(auto_now=True)
   
     def __str__(self):
-        return self.doc_type
+        return self.documment_name
 
 
 class Employee(models.Model): #Lista de Funcionários
@@ -73,8 +94,9 @@ class Cotation(models.Model): #Lista de Acões
     proj_name = models.ForeignKey(MyProject, on_delete=models.CASCADE)
     subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE)
     doc_name = models.ForeignKey(DocumentStandard, on_delete=models.CASCADE)
+    page_type = models.ForeignKey(PageT, on_delete=models.CASCADE)
     qt_page = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True)
-    qt_doc = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True) #retirar...
+    #qt_doc = models.DecimalField(max_digits=4, decimal_places=0, blank=True, null=True) #retirar...
     qt_hh = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
     cost_doc = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     created_ct = models.DateTimeField(auto_now_add=True)

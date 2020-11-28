@@ -4,10 +4,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
+from .models import MyProject, PageT, DocT, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
 
-from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
+
 from decimal import Decimal
-
 import sqlite3
 import pandas as pd
 
@@ -41,11 +41,27 @@ def projectlist(request):
 
 
 
+def Pagetypelist(request):
+    
+    pagets = PageT.objects.all()
+
+    return render(request, 'taskproject/pages-type.html', {'pagets': pagets})
+
+
+
+def Doctypelist(request):
+    
+    docts = DocT.objects.all()
+
+    return render(request, 'taskproject/doc-type.html', {'docts': docts})
+
+
+
 def documtypelist(request):
     
-    DocumentStandards = DocumentStandard.objects.all().order_by('doc_type') 
+    DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
 
-    cols = ['NOME DO DOCUMENTO', 'TIPO DE DOC','FORMATO', 'NÚMERO DE PAG', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+    cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
 
@@ -116,40 +132,8 @@ def Uploadlists(request):
 
 
 def Create_PL(request):
-    # read_all[0] = MyProject
-    # read_all[1] = Subject
-    # read_all[2] = DocumentStandard
-    # read_all[3] = Employee
-    # read_all[4] = StatusDoc
-    # read_all[5] = Action
 
-    read_all = delete_itens.delete_befor()
-
-    for id in read_all[0]:
-        proj = get_object_or_404(MyProject, pk=id)
-        proj.delete()
-
-    for id in read_all[1]:
-        sub = get_object_or_404(Subject, pk=id)
-        sub.delete()
-
-    for id in read_all[2]:
-        doc = get_object_or_404(DocumentStandard, pk=id)
-        doc.delete()
-
-    for id in read_all[3]:
-        emp = get_object_or_404(Employee, pk=id)
-        emp.delete()
-
-    for id in read_all[4]:
-        st = get_object_or_404(StatusDoc, pk=id)
-        st.delete()
-
-    for id in read_all[5]:
-        ac = get_object_or_404(Action, pk=id)
-        ac.delete()
-
-    codes.ronina_carrega_pl()
+    codes.rotina_carrega_pl()
 
     return redirect('/')
 
@@ -158,11 +142,14 @@ def Create_PL(request):
 def Create_Cotation(request):
 
     cost = ProjectValue.objects.all()
-    cost_proj = []
-    for a in cost:
-        cost_proj.append([Decimal(a.cost_by_hh),Decimal(a.cost_by_doc),Decimal(a.cost_by_A1)])
 
-    cost_proj = cost_proj[0]
+    cost_proj = []
+    if cost:
+        #print('Entrou!!!!!!!!!!!!!!!!!!')
+        for a in cost:
+            cost_proj.append([Decimal(a.cost_by_hh),Decimal(a.cost_by_doc),Decimal(a.cost_by_A1)])
+
+        cost_proj = cost_proj[0]
 
     if request.GET.get('cota-radio'):
         cost_type = request.GET.get('cota-radio')
