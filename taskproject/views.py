@@ -140,27 +140,32 @@ def Create_PL(request):
 
 def Create_LD(request):
 
-    print('>>>>>>>>>>>  Entrou LD  <<<<<<<<<<<<<<')
+    url = str(request)
+    list_get = url.split('&')
 
-    '''
-    if '_selected_action' in request.POST: #verifica se _selected_action foi enviado na requisição
-        variavel = request.POST['_selected_action']
-        print('-----------SELECTED:::: ', variavel)'''
+    itens = []
+    itens.append(list_get[1][7:])
 
-    if request.GET.get('_selected_action'):
-        print('----------------------entrou', request.GET.get('_selected_action'))
+    for a in range(len(list_get)):
+        #print('----', list_get[a][7:], a)
+        if a > 3:
+            #print('>>>>>>>', list_get[a][7:], len(list_get[a][7:]))
+            itens.append(list_get[a][7:])
 
-        for a in request.GET.get('_selected_action'):
-            print(a)
+    if len(itens[len(itens)-1]) == 3:
+        itens[len(itens)-1] = itens[len(itens)-1][:1]
 
-    if request.GET.get('action'):
-        print('----------------------entrou action :', request.GET.get('action'))
+    elif len(itens[len(itens)-1]) == 4:
+        itens[len(itens)-1] = itens[len(itens)-1][:2]
+
+    print('\n\n-----------------------------------', itens, len(itens))
+    #print('\n\n-----------------------------------', request.GET)
+
+    if itens[0] == 'create_LD' and len(itens) > 1:
+        result = trata_cota.cria_orc(itens)
+        print(result)
 
 
-    if request.GET.get('_selected'):
-        print('----------------------entrou _selected :', request.GET.get('_selected'))
-
- 
     DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
 
     cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
@@ -198,3 +203,49 @@ def Create_Cotation(request):
     return redirect('/')
     #return render(request, 'taskproject/index.html')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   # for a in request.GET['action']:
+    #     print('>>>>>', a)
+
+    # print('\n-----------------------------------')
+
+    
+
+
+
+    # if '_selected_action' in request.POST: #verifica se _selected_action foi enviado na requisição
+    #     variavel = request.POST['_selected_action']
+    #     print('-----------SELECTED:::: ', variavel)
+
+    # if request.GET.get('_selected_action'):
+    #     print('----------------------entrou', request.GET.get('_selected_action')[0])
+
+
+    # for a in request.GET.get('_selected_action'):
+    #     print(a)
+
+    #if request.GET.get('action'):
+        #print('----------------------entrou action :', request.GET.get('action'))

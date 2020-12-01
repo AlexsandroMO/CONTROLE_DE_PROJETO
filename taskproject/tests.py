@@ -28,3 +28,15 @@ from django.test import TestCase
 
     def __str__(self):
         return str(self.cost_hh) """
+
+
+
+'''
+from datetime import datetime
+data_inicial = request.GET.get('data_inicial')
+data_final = request.GET.get('data_final')
+# supondo que a data esteja no formato "%Y-%m-%d
+dI = datetime.strptime(data_inicial, "%Y-%m-%d")
+dF = datetime.strptime(data_final, "%Y-%m-%d")
+
+objs = Job.objects.filter(data_initial__gte=dI,data_final__lte=dF)'''

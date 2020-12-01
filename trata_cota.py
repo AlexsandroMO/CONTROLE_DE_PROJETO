@@ -104,3 +104,9 @@ def trata_cotation(cost_type, cost_proj):
     
     return 'Feito!'
     
+
+
+
+def cria_orc(itens):
+    print('tamo')
+    return 'feito!'

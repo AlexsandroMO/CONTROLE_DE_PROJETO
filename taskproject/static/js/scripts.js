@@ -84,3 +84,16 @@ function SendListCheck() {
     
 
 }
+
+
+function myFunction() {
+    var questao = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < questao.length; i++) {
+        if (questao[i].checked) {
+            txt = txt + questao[i].value + " ";
+        }
+    }
+    document.getElementById("selected").value = txt ;
+}
