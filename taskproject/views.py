@@ -139,7 +139,7 @@ def Create_PL(request):
 
 
 def Create_LD(request):
-
+    #----------------------------------------------------------
     url = str(request)
     list_get = url.split('&')
 
@@ -164,6 +164,9 @@ def Create_LD(request):
     if itens[0] == 'create_LD' and len(itens) > 1:
         result = trata_cota.cria_orc(itens)
         print(result)
+
+    #---------------------------------------------------------- Sei que tem como fazer isso de forma muito mais simples, mas por hora foi o que consegui fazer. (Estudar como fazer isso com recursos django...)
+
 
 
     DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
