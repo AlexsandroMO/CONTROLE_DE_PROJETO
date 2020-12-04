@@ -6,7 +6,7 @@ from datetime import datetime
 import xlrd
 
 
-def ronina_carrega_pl():
+def rotina_carrega_pl():
 
     #-------------------------------------------------------
     def cria_proj(proj_name, company, comments, date_today):
@@ -27,7 +27,7 @@ def ronina_carrega_pl():
         c = conn.cursor()
 
         qsl_datas = f"""
-                    INSERT INTO taskproject_documentstandard(documment_name, doc_type, doc_format, doc_type_page, created_doc, update_doc)
+                    INSERT INTO taskproject_documentstandard(documment_name, doc_type_id, format_doc_id, doc_type_page_id, created_doc, update_doc)
                     VALUES ('{doc_name}','{code_doc}','{format_doc}','{doc_type}','{date_today}','{date_today}');
                     """
         c.execute(qsl_datas)
@@ -88,16 +88,56 @@ def ronina_carrega_pl():
         conn.close()
 
 
+    def cria_paget(name_page, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_paget(name_page,created_pt,update_pt)
+                    VALUES ('{name_page}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    def cria_doct(name_doc, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_doct(name_doc,created_dt,update_dt)
+                    VALUES ('{name_doc}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    def cria_form(form, date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_pageformat(name_format,created_fm,update_fm)
+                    VALUES ('{form}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
 
     date_today = datetime.today()
 
     df_proj = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','PROJECTS')
+    df_doct = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','DOC_TYPE')
+    df_paget = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','PAGE_TYPE')
     df_doc = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','MODELO_DOCUMENTO')
     df_dis = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','DISCIPLINAS')
     df_st = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','STATUS')
     df_ac = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','ACAO')
     df_emp = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','EMPLOYEES')
-
+    df_form = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','FORMAT_PAGE')
 
     for a in range(len(df_proj['NOME_PROJETO'])):
         proj_name = df_proj['NOME_PROJETO'].loc[a]
@@ -106,11 +146,25 @@ def ronina_carrega_pl():
 
         cria_proj(proj_name, company, comments, date_today)
 
+
+    for a in range(len(df_paget['TIPO_FOLHA'])):
+        name_page = df_paget['TIPO_FOLHA'].loc[a]
+
+        cria_paget(name_page, date_today)
+
+
+    for a in range(len(df_doct['TIPO_DOC'])):
+        name_doc = df_doct['TIPO_DOC'].loc[a]
+
+        cria_doct(name_doc, date_today)
+
+
     for a in range(len(df_doc['LISTA_DOCUMENTOS'])):
         doc_name = df_doc['LISTA_DOCUMENTOS'].loc[a]
-        code_doc = df_doc['COD_DOC_TIPO'].loc[a]
+        code_doc = int(df_doc['COD_DOC_TIPO'].loc[a])
         format_doc = df_doc['FORMATO'].loc[a]
-        doc_type = df_doc['TIPO'].loc[a]
+        doc_type = int(df_doc['TIPO'].loc[a])
+        #print(doc_name, code_doc, format_doc, doc_type, date_today)
 
         cria_doc(doc_name, code_doc, format_doc, doc_type, date_today)
 
@@ -141,4 +195,15 @@ def ronina_carrega_pl():
         cria_func(func, cargo, contr, date_today)
 
 
+    for a in range(len(df_form['FORMATO_FOLHA'])):
+        form = df_form['FORMATO_FOLHA'].loc[a]
+
+        cria_form(form, date_today)
+
+
     print('Feito!')
+
+
+    #######Atualizar cargas!!!!!!!!!
+ 
+    

@@ -4,7 +4,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 #from .forms import TaskForm
 #from django.contrib import messages
-from .models import MyProject, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload
+from .models import MyProject, PageT, DocT, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
+
+
+from decimal import Decimal
 import sqlite3
 import pandas as pd
 
@@ -31,20 +34,38 @@ def index(request):
 
 def projectlist(request):
 
-    MyProjects = MyProject.objects.all().order_by('project_name')
+    MyProjects = MyProject.objects.all().order_by('-project_name')
     cols = ['NOME DO PROJETO', 'NOME DA EMPRESA','COMENTÁRIOS', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/projetos.html', {'MyProjects': MyProjects, 'cols':cols})
 
 
 
-def documtypelist(request):
+def Pagetypelist(request):
     
-    DocumentStandards = DocumentStandard.objects.all().order_by('doc_type') 
+    pagets = PageT.objects.all()
 
-    cols = ['NOME DO DOCUMENTO', 'TIPO DE DOC','FORMATO', 'NÚMERO DE PAG', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+    return render(request, 'taskproject/pages-type.html', {'pagets': pagets})
 
-    return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
+
+
+def Doctypelist(request):
+    
+    docts = DocT.objects.all()
+
+    return render(request, 'taskproject/doc-type.html', {'docts': docts})
+
+
+
+def docummentypelist(request):
+    
+    DocumentStandards = DocumentStandard.objects.all().order_by('doc_type')
+    MyProjects = MyProject.objects.all().order_by('project_name') 
+    Subjects = Subject.objects.all().order_by('subject_name') 
+
+    cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+
+    return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols, 'MyProjects':MyProjects, 'Subjects': Subjects})
 
 
 
@@ -83,21 +104,11 @@ def Employeelist(request):
 def Cotationlist(request):
 
     Cotations = Cotation.objects.all().order_by('-proj_name')
-    DocStandards = DocumentStandard.objects.all().order_by('doc_type')
+    DocStandards = DocumentStandard.objects.all().order_by('-doc_type')
 
     new_list = []
-    
-    for b in Cotations:
-        for c in DocStandards:
-            if b.doc_name_id == c.id:
-                doc = c.documment_name
-                doc_type_page = c.doc_type_page
-                doc_format = c.doc_format
-                print('>>>>>>>>>', doc, doc_type_page, doc_format)
-                #new_list.append([doc, doc_type_page, doc_format])
-                new_list.append([b.id,b.proj_name,b.subject_name,doc,b.doc_name,doc_type_page,doc_format,b.qt_page,b.qt_doc,b.qt_hh,b.cost_doc,b.update_ct])
 
-    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. DOC', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
     return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
 	
@@ -112,55 +123,136 @@ def Uploadlists(request):
     return render(request, 'taskproject/upload.html', {'Uploads':Uploads})
 
 
-def Create_PL(request):
-    # read_all[0] = MyProject
-    # read_all[1] = Subject
-    # read_all[2] = DocumentStandard
-    # read_all[3] = Employee
-    # read_all[4] = StatusDoc
-    # read_all[5] = Action
+def Create_PL(request): #Uso admin /CreatePL
 
-    read_all = delete_itens.delete_befor()
-
-    for id in read_all[0]:
-        proj = get_object_or_404(MyProject, pk=id)
-        proj.delete()
-
-    for id in read_all[1]:
-        sub = get_object_or_404(Subject, pk=id)
-        sub.delete()
-
-    for id in read_all[2]:
-        doc = get_object_or_404(DocumentStandard, pk=id)
-        doc.delete()
-
-    for id in read_all[3]:
-        emp = get_object_or_404(Employee, pk=id)
-        emp.delete()
-
-    for id in read_all[4]:
-        st = get_object_or_404(StatusDoc, pk=id)
-        st.delete()
-
-    for id in read_all[5]:
-        ac = get_object_or_404(Action, pk=id)
-        ac.delete()
-
-    codes.ronina_carrega_pl()
+    codes.rotina_carrega_pl()
 
     return redirect('/')
+
+
+def Create_LD(request):
+    #----------------------------------------------------------
+    url = str(request)
+    list_get = url.split('&')
+
+    if list_get[5][10:] == 'All':
+        print('entrou', len(list_get[5][10:]))
+        num = 6
+
+    else:
+        num = 5
+
+    itens = []  
+    itens.append(list_get[1][7:])
+    itens.append(list_get[2][5:])
+    itens.append(list_get[3][4:])
+
+    for a in range(len(list_get)):
+        if a > num:
+            itens.append(list_get[a][7:])
+
+    if len(itens[len(itens)-1]) == 3:
+        itens[len(itens)-1] = itens[len(itens)-1][:1]
+
+    elif len(itens[len(itens)-1]) == 4:
+        itens[len(itens)-1] = itens[len(itens)-1][:2]
+
+
+    print('\n>>>>>>')
+    for a in list_get:
+        print(a)
+
+    print('_selected=:      ',list_get[5][13:])
+
+
+    if itens[0] == 'create_budget' and len(itens) > 3:
+        result = trata_cota.cria_orc(itens)
+
+
+   
+  
+    
+    #---------------------------------------------------------- Sei que tem como fazer isso de forma muito mais simples, mas por hora foi o que consegui fazer. (Estudar como fazer isso com recursos django...)
+
+    DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
+
+    cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+
+    #return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
+    return redirect('documment-type-list')
+   
 
 
 
 def Create_Cotation(request):
 
-    read_cota = delete_itens.delete_cotation()
+    cost = ProjectValue.objects.all()
 
-    for id in read_cota:
-        cota = get_object_or_404(Cotation, pk=id)
-        cota.delete()
+    cost_proj = []
+    if cost:
+        #print('Entrou!!!!!!!!!!!!!!!!!!')
+        for a in cost:
+            cost_proj.append([Decimal(a.cost_by_hh),Decimal(a.cost_by_doc),Decimal(a.cost_by_A1)])
 
-    trata_cota.trata_cotation()
+        cost_proj = cost_proj[0]
+
+    if request.GET.get('cota-radio'):
+        cost_type = request.GET.get('cota-radio')
+
+        read_cota = delete_itens.delete_cotation()
+
+        for id in read_cota:
+            cota = get_object_or_404(Cotation, pk=id)
+            cota.delete()
+
+        trata_cota.trata_cotation(cost_type, cost_proj)
 
     return redirect('/')
+    #return render(request, 'taskproject/index.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   # for a in request.GET['action']:
+    #     print('>>>>>', a)
+
+    # print('\n-----------------------------------')
+
     
+
+
+
+    # if '_selected_action' in request.POST: #verifica se _selected_action foi enviado na requisição
+    #     variavel = request.POST['_selected_action']
+    #     print('-----------SELECTED:::: ', variavel)
+
+    # if request.GET.get('_selected_action'):
+    #     print('----------------------entrou', request.GET.get('_selected_action')[0])
+
+
+    # for a in request.GET.get('_selected_action'):
+    #     print(a)
+
+    #if request.GET.get('action'):
+        #print('----------------------entrou action :', request.GET.get('action'))

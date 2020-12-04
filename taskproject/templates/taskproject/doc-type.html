@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Cotação{% endblock %}
+{% block title %}Siglas Documentos{% endblock %}
 {% block content %}
 <!-- Content -->
 <div id="content" class="flex">
         
-    <h1>Cotaçãso do Projeto</h1>
+    <h1>Lista de Siglas para Documentos</h1>
     
     <div id="content-main">
         <ul class="object-tools">
             <li>
                 <a href="#" class="addlink">
-                Cotação de Projeto
+                Siglas de Documentos
                 </a>
             </li>
         </ul>
@@ -41,31 +41,28 @@
                                 <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
                                 <div class="clear"></div>
                             </th>
-                            {% for col in cols %}
                             <th scope="col"  class="column-__str__">
-                                <div class="text"><a href="?o=2">{{ col }}</a></div>
+                                <div class="text"><a href="?o=1">SIGLA</a></div>
                                 <div class="clear"></div>
                             </th>
-                            {% endfor %}
+                            <th scope="col"  class="column-__str__">
+                                <div class="text"><a href="?o=1">DATA DE CRAÇÃO</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            <th scope="col"  class="column-__str__">
+                                <div class="text"><a href="?o=1">ULTIMA ATUALIZAÇÃO</a></div>
+                                <div class="clear"></div>
+                            </th>
     
                         </tr>
                     </thead>
                     <tbody>
-
-                        {% for cota in Cotations %}
+                        {% for doc in docts %}
                             <tr>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="{% url 'admin:index' %}taskproject/cotation/{{cota.id}}/change/">{{cota.proj_name}}</a></th>
-                                <td class="field-comments">{{cota.subject_name}}</td>
-                                <td class="field-comments">{{cota.doc_name}}</td>
-                                <td class="field-comments">{{cota.doc_type}}</td>
-                                <td class="field-comments">{{cota.format_doc}}</td>
-                                <td class="field-comments">{{cota.page_type}}</td>
-                                <td class="field-comments">{{cota.qt_page}}</td>
-                                <td class="field-comments">{{cota.qt_hh}}</td>
-                                <td class="field-comments">{{cota.cost_doc}}</td>
-                                <td class="field-comments">{{cota.update_ct}}</td>
-                                
+                                <th class="field-project_name"><a href="{{xxx.id}}">{{doc.name_doc}}</a></th>
+                                <td class="field-comments">{{doc.created_dt}}</td>
+                                <td class="field-comments">{{doc.update_dt}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

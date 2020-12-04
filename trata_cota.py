@@ -6,9 +6,11 @@ import pandasql as ps
 from datetime import datetime
 
 
-   #Trata Cotation lista
-    #-----------------------------------
-def trata_cotation():
+#Trata Cotation lista
+#-----------------------------------
+def trata_cotation(cost_type, cost_proj):
+    
+    print('>>>>>>>>>>>>', cost_type, cost_proj)
 
     df_cota = pd.read_excel('media_files/uploads/TABELAS_PROJETO_CONTROLE_DE_PROJETO.xlsx','COTATION_DOC')
 
@@ -88,10 +90,59 @@ def trata_cotation():
         qt_doc = new_df['qt_doc'].loc[a]
         qt_hh = new_df['qt_hh'].loc[a]
         #cost_hh = 100 * qt_hh
-        cost_doc = 1000 * qt_doc
+        if cost_type == 'option1':
+            cost_doc = cost_proj[0] * qt_hh
 
+        elif cost_type == 'option2':
+            cost_doc = cost_proj[1] * qt_doc
+
+        elif cost_type == 'option3':
+            cost_doc = cost_proj[2] * qt_page
+   
         cria_cota(proj_name_id,subject_name_id,doc_name_id,qt_page,qt_doc,qt_hh,cost_doc,date_today)
 
     
     return 'Feito!'
     
+
+
+
+def cria_orc(itens):
+
+    def read_sql_doc(id): #Information Tables Read
+        conn = sqlite3.connect('db.sqlite3')
+        sql_datas = f"""
+                    SELECT * FROM taskproject_DocumentStandard
+                    WHERE id = {id};
+        """
+
+        read_db = pd.read_sql_query(sql_datas, conn)
+        conn.close()
+        
+        return read_db
+
+
+    def cria_cotation(proj_name,subj_name,doc_name,doc_type,format_doc,page_type,date_today):
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+
+        qsl_datas = f"""
+                    INSERT INTO taskproject_cotation(proj_name_id,subject_name_id,doc_name_id,doc_type_id,page_type_id,format_doc_id,created_ct,update_ct)
+                    VALUES ('{proj_name}','{subj_name}','{doc_name}','{doc_type}','{page_type}','{format_doc}','{date_today}','{date_today}');
+                    """
+        c.execute(qsl_datas)
+        conn.commit()
+        conn.close()
+
+
+    date_today = datetime.today()
+    print('\n-----------------------------')
+    
+    for i in range(len(itens)):
+        if i > 2:
+            doc = read_sql_doc(int(i))
+            #print('entrou!!!!')
+            cria_cotation(int(itens[1]), int(itens[2]), doc['id'].loc[0], doc['doc_type_id'].loc[0],doc['doc_type_page_id'].loc[0],doc['format_doc_id'].loc[0], date_today)
+
+ 
+    return 'feito!'

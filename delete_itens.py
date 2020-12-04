@@ -1,3 +1,74 @@
+
+# read_all[0] = MyProject
+    # read_all[1] = PageT
+    # read_all[2] = DOCT
+    # read_all[3] = Subject
+    # read_all[4] = DocumentStandard
+    # read_all[5] = Employee
+    # read_all[6] = StatusDoc
+    # read_all[7] = Action
+
+''' read_all = delete_itens.delete_befor()
+
+    if read_all[0]:
+        for id in read_all[0]:
+            proj = get_object_or_404(MyProject, pk=id)
+            proj.delete()
+    
+    if read_all[1]:
+        for id in read_all[1]:
+            dot = get_object_or_404(PageT, pk=id)
+            dot.delete()
+
+    if read_all[2]:
+        for id in read_all[2]:
+            dot = get_object_or_404(DocT, pk=id)
+            dot.delete()
+
+    if read_all[3]:
+        for id in read_all[3]:
+            pag = get_object_or_404(Subject, pk=id)
+            pag.delete()
+
+    if read_all[4]:
+        for id in read_all[4]:
+            doc = get_object_or_404(DocumentStandard, pk=id)
+            doc.delete()
+
+
+    if read_all[5]:
+        for id in read_all[5]:
+            emp = get_object_or_404(Employee, pk=id)
+            emp.delete()
+
+
+    if read_all[6]:
+        for id in read_all[6]:
+            st = get_object_or_404(StatusDoc, pk=id)
+            st.delete()
+
+
+    if read_all[7]:
+        for id in read_all[7]:
+            ac = get_object_or_404(Action, pk=id)
+            ac.delete()'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import numpy as np
 import pandas as pd
 import sqlite3
@@ -12,6 +83,27 @@ def delete_befor():
         conn = sqlite3.connect('db.sqlite3')
         sql_datas = f"""
                     SELECT * FROM taskproject_myproject;
+        """
+        read_db = pd.read_sql_query(sql_datas, conn)
+        conn.close()
+        
+        return read_db
+
+
+    def read_pag():
+        conn = sqlite3.connect('db.sqlite3')
+        sql_datas = f"""
+                    SELECT * FROM taskproject_paget;
+        """
+        read_db = pd.read_sql_query(sql_datas, conn)
+        conn.close()
+        
+        return read_db
+
+    def read_dot():
+        conn = sqlite3.connect('db.sqlite3')
+        sql_datas = f"""
+                    SELECT * FROM taskproject_doct;
         """
         read_db = pd.read_sql_query(sql_datas, conn)
         conn.close()
@@ -75,11 +167,17 @@ def delete_befor():
 
  
     #------------------------------------------------
-    new_proj, new_sub, new_doc, new_emp, new_st, new_ac = [],[],[],[],[],[]
+    new_proj, new_pag, new_dot, new_sub, new_doc, new_emp, new_st, new_ac = [],[],[],[],[],[],[],[]
     
     #------------------------------------------------
     for i in read_proj()['id']:
         new_proj.append(i)
+
+    for i in read_pag()['id']:
+        new_pag.append(i)
+
+    for i in read_dot()['id']:
+        new_dot.append(i)
 
     for i in read_sub()['id']:
         new_sub.append(i)
@@ -96,7 +194,7 @@ def delete_befor():
     for i in read_ac()['id']:
         new_ac.append(i)
 
-    read_all = [new_proj, new_sub, new_doc, new_emp, new_st, new_ac]
+    read_all = [new_proj, new_pag, new_dot, new_sub, new_doc, new_emp, new_st, new_ac]
 
     return read_all
 

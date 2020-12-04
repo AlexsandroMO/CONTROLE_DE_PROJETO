@@ -19,6 +19,8 @@ from django.test import TestCase
 #https://pythonacademy.com.br/blog/desenvolvimento-web-com-python-e-django-view
 
 
+#para carregar planilhas digitar http://127.0.0.1:8000/CreatePL no navegador direto e zerar o db
+
 """ class ProjectValue(models.Model): #Upload de arquivos
     cost_hh = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     cost_doc = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
@@ -27,4 +29,18 @@ from django.test import TestCase
     def __str__(self):
         return str(self.cost_hh) """
 
+
 #03001001213 - itau
+
+
+
+'''
+from datetime import datetime
+data_inicial = request.GET.get('data_inicial')
+data_final = request.GET.get('data_final')
+# supondo que a data esteja no formato "%Y-%m-%d
+dI = datetime.strptime(data_inicial, "%Y-%m-%d")
+dF = datetime.strptime(data_final, "%Y-%m-%d")
+
+objs = Job.objects.filter(data_initial__gte=dI,data_final__lte=dF)'''
+>>>>>>> 8c29299171992f55ca4bb75150f91ef156ded609
