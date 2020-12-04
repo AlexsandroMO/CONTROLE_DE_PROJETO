@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'taskproject',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media_files'

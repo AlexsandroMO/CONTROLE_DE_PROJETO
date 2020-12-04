@@ -55,7 +55,7 @@
                         {% for cota in Cotations %}
                             <tr>
                                 <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="{% url 'admin:index' %}taskproject/cotation/{{cota.id}}/change/">{{cota.proj_name}}</a></th>
+                                <th class="field-project_name"><a href="http://127.0.0.1:8000/edite_cotation/{{cota.id}}">{{cota.proj_name}}</a></th>
                                 <td class="field-comments">{{cota.subject_name}}</td>
                                 <td class="field-comments">{{cota.doc_name}}</td>
                                 <td class="field-comments">{{cota.doc_type}}</td>

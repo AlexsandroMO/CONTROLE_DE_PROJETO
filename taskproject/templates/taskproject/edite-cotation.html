@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Cotação{% endblock %}
+{% block content %}
+
+<!-- Content -->
+<div id="content" class="flex">
+        
+    <h1>Cotaçãso do Projeto</h1>
+    
+                <!-- Lista de Iten das Tabelas -->
+                <div class="results">
+                    <table id="result_list">
+                    <thead>
+                        <tr>
+                           
+                            {% for col in cols %}
+                            <th scope="col"  class="column-__str__">
+                                <div class="text"><a href="{% url 'admin:index' %}taskproject/documentstandard/add/">{{ col }}</a></div>
+                                <div class="clear"></div>
+                            </th>
+                            {% endfor %}
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form method="POST">
+                                {% csrf_token %}
+                            <tr>
+                                <td class="field-comments">{{form.proj_name}}</td>
+                                <td class="field-comments">{{form.subject_name}}</td>
+                                <td class="field-comments">{{form.doc_name}}</td>
+                                <td class="field-comments">{{form.doc_type}}</td>
+                                <td class="field-comments">{{form.format_doc}}</td>
+                                <td class="field-comments">{{form.page_type}}</td>
+                                <td class="field-comments">{{form.qt_page}}</td>
+                                <td class="field-comments">{{form.qt_hh}}</td>
+                            </tr>
+                            <input type="submit" class="btn btn-sucess" value="Editar Documento">
+                        </form>
+                    </tbody>
+                    </table>
+                </div>
+                <a href="{% url 'cotation-list' %}"><button type="submit" class="button" title="Run the selected action" name="index" value="0">Voltar</button></a>
+
+                <p class="paginator">3 document standards</p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -107,7 +107,7 @@ def trata_cotation(cost_type, cost_proj):
 
 
 
-def cria_orc(itens):
+def cria_orc(result_itens):
 
     def read_sql_doc(id): #Information Tables Read
         conn = sqlite3.connect('db.sqlite3')
@@ -122,7 +122,7 @@ def cria_orc(itens):
         return read_db
 
 
-    def cria_cotation(proj_name,subj_name,doc_name,doc_type,format_doc,page_type,date_today):
+    def cria_cotation(proj_name,subj_name,doc_name,doc_type,page_type,format_doc,date_today):
         conn = sqlite3.connect('db.sqlite3')
         c = conn.cursor()
 
@@ -138,11 +138,15 @@ def cria_orc(itens):
     date_today = datetime.today()
     print('\n-----------------------------')
     
-    for i in range(len(itens)):
-        if i > 2:
-            doc = read_sql_doc(int(i))
-            #print('entrou!!!!')
-            cria_cotation(int(itens[1]), int(itens[2]), doc['id'].loc[0], doc['doc_type_id'].loc[0],doc['doc_type_page_id'].loc[0],doc['format_doc_id'].loc[0], date_today)
+    for i in range(len(result_itens[1])):
+        print('i:        ',result_itens[1][i])
+        doc = read_sql_doc(int(result_itens[1][i]))
+        print('entrou!!!!', doc)
+
+        cria_cotation(int(result_itens[0][1]), int(result_itens[0][2]), doc['id'].loc[0], doc['doc_type_id'].loc[0],doc['doc_type_page_id'].loc[0],doc['format_doc_id'].loc[0], date_today)
 
  
     return 'feito!'
+
+
+

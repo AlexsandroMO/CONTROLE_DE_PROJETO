@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 #from django.contrib.auth.decorators import login_required
 #from django.core.paginator import Paginator
 from django.http import HttpResponse
-#from .forms import TaskForm
+from .forms import CotationForm
 #from django.contrib import messages
 from .models import MyProject, PageT, DocT, DocumentStandard, Subject, Action, StatusDoc, Employee, Cotation, Upload, ProjectValue
 
@@ -101,18 +101,6 @@ def Employeelist(request):
     return render(request, 'taskproject/employee.html', {'Employees': Employees, 'cols':cols})
 
 
-def Cotationlist(request):
-
-    Cotations = Cotation.objects.all().order_by('-proj_name')
-    DocStandards = DocumentStandard.objects.all().order_by('-doc_type')
-
-    new_list = []
-
-    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
-
-    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
-	
-
 
 def Uploadlists(request):
     if request.GET.get('arq'):
@@ -135,21 +123,26 @@ def Create_LD(request):
     url = str(request)
     list_get = url.split('&')
 
-    if list_get[5][10:] == 'All':
-        print('entrou', len(list_get[5][10:]))
-        num = 6
-
-    else:
-        num = 5
-
-    itens = []  
-    itens.append(list_get[1][7:])
-    itens.append(list_get[2][5:])
-    itens.append(list_get[3][4:])
-
+    print('\n-----------------------------------------')
+    itens = [] 
     for a in range(len(list_get)):
-        if a > num:
+        if list_get[a][:4] == 'acti':
+            print('<<-acti->>',list_get[a][7:])
             itens.append(list_get[a][7:])
+
+        elif list_get[a][:4] == 'proj':
+            print('<<-proj->>',list_get[a][5:])
+            itens.append(list_get[a][5:])
+
+        elif list_get[a][:4] == 'sub=':
+            print('<<-sub->>',list_get[a][4:])
+            itens.append(list_get[a][4:])
+
+        elif list_get[a][:4] == '_sel':
+            print('<<-_sel->>',list_get[a][10:])
+            itens.append(list_get[a][10:])
+
+    print('\n-----------------------------------------')
 
     if len(itens[len(itens)-1]) == 3:
         itens[len(itens)-1] = itens[len(itens)-1][:1]
@@ -157,21 +150,21 @@ def Create_LD(request):
     elif len(itens[len(itens)-1]) == 4:
         itens[len(itens)-1] = itens[len(itens)-1][:2]
 
+    
+    if itens[3] == 'All':
+        print('result itens com All=      ', itens[4:])
+        list_id = itens[4:]
+    else:
+        print('result itens sem All=      ', itens[3:])
+        list_id = itens[3:]
 
-    print('\n>>>>>>')
-    for a in list_get:
-        print(a)
-
-    print('_selected=:      ',list_get[5][13:])
+    result_itens = [itens[:3],list_id]
+    print('result = :    ', result_itens[0], '--', result_itens[1])
 
 
     if itens[0] == 'create_budget' and len(itens) > 3:
-        result = trata_cota.cria_orc(itens)
+        result = trata_cota.cria_orc(result_itens)
 
-
-   
-  
-    
     #---------------------------------------------------------- Sei que tem como fazer isso de forma muito mais simples, mas por hora foi o que consegui fazer. (Estudar como fazer isso com recursos django...)
 
     DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
@@ -179,10 +172,49 @@ def Create_LD(request):
     cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
 
     #return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
-    return redirect('documment-type-list')
-   
+    return redirect('cotation-list')
+
+#---------------------------------------------------------------
+def Cotationlist(request):
+
+    Cotations = Cotation.objects.all().order_by('doc_name')
+    DocStandards = DocumentStandard.objects.all().order_by('-doc_type')
+
+    new_list = []
+
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
+
+    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
+	
+
+def EditeCotation(request, id):
+    Cotations = get_object_or_404(Cotation, pk=id)
+    form = CotationForm(instance=Cotations)
+
+    cols = ['NOME DO PROJETO', 'DISCIPLINA', 'NOME DOC.', 'COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH']
+
+    if request.method == 'POST':
+        form = CotationForm(request.POST, instance=Cotations)
+        if form.is_valid():
+            Cotations = form.save()
+            return redirect('cotation-list')
+        else:
+            return render(request, 'taskproject/edite-cotation.html', {'form': form, 'Cotations': Cotations, 'cols':cols}) 
+
+    else:
+        return render(request, 'taskproject/edite-cotation.html', {'form': form, 'Cotations': Cotations,'cols':cols})
 
 
+def DeleteCotation(request, id):
+    task = get_object_or_404(Task, pk=id)
+    task.delete()
+
+    messages.info(request, 'Template Deletado com Sucesso!')
+
+    return redirect('/')
+
+
+#---------------------------------------------------------------
 
 def Create_Cotation(request):
 
@@ -256,3 +288,63 @@ def Create_Cotation(request):
 
     #if request.GET.get('action'):
         #print('----------------------entrou action :', request.GET.get('action'))
+
+
+
+
+
+
+
+
+""" 
+def Create_LD(request):
+    #----------------------------------------------------------
+    url = str(request)
+    list_get = url.split('&')
+
+    if list_get[5][10:] == 'All':
+        print('entrou', len(list_get[5][10:]))
+        num = 6
+
+    else:
+        num = 5
+
+    itens = []  
+    itens.append(list_get[1][7:])
+    itens.append(list_get[2][5:])
+    itens.append(list_get[3][4:])
+
+    for a in range(len(list_get)):
+        if a > num:
+            itens.append(list_get[a][7:])
+
+    if len(itens[len(itens)-1]) == 3:
+        itens[len(itens)-1] = itens[len(itens)-1][:1]
+
+    elif len(itens[len(itens)-1]) == 4:
+        itens[len(itens)-1] = itens[len(itens)-1][:2]
+
+
+    print('\n>>>>>>')
+    for a in list_get:
+        print(a)
+
+    print('_selected=:      ',list_get[5][13:])
+
+
+    if itens[0] == 'create_budget' and len(itens) > 3:
+        result = trata_cota.cria_orc(itens)
+
+
+   
+  
+    
+    #---------------------------------------------------------- Sei que tem como fazer isso de forma muito mais simples, mas por hora foi o que consegui fazer. (Estudar como fazer isso com recursos django...)
+
+    DocumentStandards = DocumentStandard.objects.all().order_by('documment_name') 
+
+    cols = ['NOME DO DOCUMENTO', 'SIGLA DOC','FORMATO', 'TIPO FOLHA', 'DATA DE CRAÇÃO', 'ULTIMA ATUALIZAÇÃO']
+
+    #return render(request, 'taskproject/tipos-documentos.html', {'DocumentStandards': DocumentStandards, 'cols':cols})
+    return redirect('documment-type-list')
+    """
