@@ -172,10 +172,18 @@ def Create_LD(request):
 #---------------------------------------------------------------
 def Cotationlist(request):
 
-    Cotations = Cotation.objects.all().order_by('doc_name_pattern')
-    DocStandards = DocumentStandard.objects.all().order_by('-doc_type')
+    Cotations = Cotation.objects.all().order_by('proj_name')#.order_by('subject_name')
+    MyProjects = MyProject.objects.all().order_by('project_name')
+
+    DocStandards = DocumentStandard.objects.all()
 
     if request.GET:
+        proj_filter = 0
+
+        if request.GET.get('proj'):
+            for a in request.GET.get('proj'):
+                print('>>>>', a)
+                proj_filter = a
 
         cost = ProjectValue.objects.all()
 
@@ -183,6 +191,7 @@ def Cotationlist(request):
         if cost:
             for a in cost:
                 cost_proj.append([a.cost_by_hh,a.cost_by_doc,a.cost_by_A1])
+
 
         if request.GET.get('cota'):
             cost_type = request.GET.get('cota')
@@ -195,15 +204,22 @@ def Cotationlist(request):
             elif cost_type == 'option3':
                 val = cost_proj[0][2]
 
-        trata_cota.trata_cotation(str(val), cost_type)
+            trata_cota.trata_cotation(str(val), cost_type)
+
 
         cols = ['NOME DO PROJETO', 'DISCIPLINA', 'TIPO DOC.', 'NOME DOC','COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
-        return redirect('cotation-list')
+        if proj_filter != 0:
+            print('ENTROU')
+            Cotations = Cotation.objects.all().filter(proj_name=proj_filter)
+            return redirect('cotation-list', Cotations='Cotations')
+            #https://pt.stackoverflow.com/questions/421135/como-fazer-redirect-na-p%C3%A1gina-com-django
+
+        return redirect('cotation-list' )
 
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'TIPO DOC.', 'NOME DOC','COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
-    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols})
+    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'MyProjects':MyProjects})
 	
 
 def EditeCotation(request, id):

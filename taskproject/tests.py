@@ -21,6 +21,9 @@ from django.test import TestCase
 
 #para carregar planilhas digitar http://127.0.0.1:8000/CreatePL no navegador direto e zerar o db
 
+#FILTROS
+#https://www.alura.com.br/artigos/django-query-sets-e-orm?gclid=CjwKCAiA_Kz-BRAJEiwAhJNY790u5nNqo3kxpZnNDMk2BNk8nWXaR_oRCb9QJIiFQM4ePufwlupkPRoCRI4QAvD_BwE
+
 """ class ProjectValue(models.Model): #Upload de arquivos
     cost_hh = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     cost_doc = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
@@ -43,4 +46,4 @@ dI = datetime.strptime(data_inicial, "%Y-%m-%d")
 dF = datetime.strptime(data_final, "%Y-%m-%d")
 
 objs = Job.objects.filter(data_initial__gte=dI,data_final__lte=dF)'''
->>>>>>> 8c29299171992f55ca4bb75150f91ef156ded609
+

@@ -36,6 +36,17 @@
                     </select></label>
                     <input type="hidden" name="select_across" value="0" class="select-across">
                     <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+
+                    <label id="label-alinha">Filtro Projeto: <select name="proj" required>
+                    <option value="" selected>---------</option>
+                    
+                    {% for proj in MyProjects %}
+                        <option value={{proj.id}}>{{proj.project_name}}</option>
+                    {% endfor %}
+                   
+                    </select></label>
+                    <input type="hidden" name="select_across" value="0" class="select-across">
+                    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
                 </div>
 
                 <!-- Lista de Iten das Tabelas -->
