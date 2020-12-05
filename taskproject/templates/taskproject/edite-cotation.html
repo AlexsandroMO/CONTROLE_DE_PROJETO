@@ -25,14 +25,15 @@
                     </thead>
                     <tbody>
                         <form method="POST">
-                                {% csrf_token %}
+                            {% csrf_token %}
                             <tr>
                                 <td class="field-comments">{{form.proj_name}}</td>
                                 <td class="field-comments">{{form.subject_name}}</td>
+                                <td class="field-comments">{{form.doc_name_pattern}}</td>
                                 <td class="field-comments">{{form.doc_name}}</td>
-                                <td class="field-comments">{{form.doc_type}}</td>
-                                <td class="field-comments">{{form.format_doc}}</td>
+                                <td class="field-comments">{{form.cod_doc_type}}</td>
                                 <td class="field-comments">{{form.page_type}}</td>
+                                <td class="field-comments">{{form.format_doc}}</td>
                                 <td class="field-comments">{{form.qt_page}}</td>
                                 <td class="field-comments">{{form.qt_hh}}</td>
                             </tr>
