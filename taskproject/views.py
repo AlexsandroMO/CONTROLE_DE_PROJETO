@@ -175,11 +175,35 @@ def Cotationlist(request):
     Cotations = Cotation.objects.all().order_by('doc_name_pattern')
     DocStandards = DocumentStandard.objects.all().order_by('-doc_type')
 
-    new_list = []
+    if request.GET:
+
+        cost = ProjectValue.objects.all()
+
+        cost_proj = []
+        if cost:
+            for a in cost:
+                cost_proj.append([a.cost_by_hh,a.cost_by_doc,a.cost_by_A1])
+
+        if request.GET.get('cota'):
+            cost_type = request.GET.get('cota')
+            if cost_type == 'option1':
+                val = cost_proj[0][0]
+
+            elif cost_type == 'option2':
+                val = cost_proj[0][1]
+
+            elif cost_type == 'option3':
+                val = cost_proj[0][2]
+
+        trata_cota.trata_cotation(str(val), cost_type)
+
+        cols = ['NOME DO PROJETO', 'DISCIPLINA', 'TIPO DOC.', 'NOME DOC','COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
+
+        return redirect('cotation-list')
 
     cols = ['NOME DO PROJETO', 'DISCIPLINA', 'TIPO DOC.', 'NOME DOC','COD. DOC.', 'TIPO FOLHA','EXT. DOC','QD. FOLHAS', 'QT. HH','CUSTO DOC.', 'ULTIMA ATUALIZAÇÃO']
 
-    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols, 'new_list':new_list})
+    return render(request, 'taskproject/cotation.html', {'Cotations':Cotations, 'DocStandards':DocStandards,'cols':cols})
 	
 
 def EditeCotation(request, id):
@@ -211,6 +235,7 @@ def DeleteCotation(request, id):
 
 #---------------------------------------------------------------
 
+
 def Create_Cotation(request):
 
     cost = ProjectValue.objects.all()
@@ -234,4 +259,29 @@ def Create_Cotation(request):
     trata_cota.trata_cotation(str(val), cost_type)
 
     return redirect('cotation-list')
+
+
+""" def Create_Cotation(request):
+
+    cost = ProjectValue.objects.all()
+
+    cost_proj = []
+    if cost:
+        for a in cost:
+            cost_proj.append([a.cost_by_hh,a.cost_by_doc,a.cost_by_A1])
+
+    if request.GET.get('cota-radio'):
+        cost_type = request.GET.get('cota-radio')
+        if cost_type == 'option1':
+            val = cost_proj[0][0]
+
+        elif cost_type == 'option2':
+            val = cost_proj[0][1]
+
+        elif cost_type == 'option3':
+            val = cost_proj[0][2]
+
+    trata_cota.trata_cotation(str(val), cost_type)
+
+    return redirect('cotation-list') """
 

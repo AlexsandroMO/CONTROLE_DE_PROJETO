@@ -49,7 +49,7 @@ def trata_cotation(val, cost_type):
                 print('É necessário que o campo QT_HH estejam preenchidos')
 
         elif cost_type == 'option2':
-            if str(cota['qt_page'].loc[a]) != 'nan':
+            if str(cota['qt_page'].loc[a]) != 'nan' and str(cota['qt_hh'].loc[a]) != 'nan':
                 custo = Decimal(val)
                 cria_cota(custo, date_today, cota['id'].loc[a])
             else:
