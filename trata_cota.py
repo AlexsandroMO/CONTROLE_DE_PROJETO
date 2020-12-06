@@ -38,7 +38,6 @@ def trata_cotation(val, cost_type):
     date_today = datetime.today()
     cota = read_sql_cota()
 
-    print('<><><><><><>: ',cota['page_type_id'].loc[2])
 
     for a in range(len(cota)):
         if cost_type == 'option1':
@@ -115,10 +114,7 @@ def cria_orc(result_itens):
     print('\n-----------------------------')
     
     for i in range(len(result_itens[1])):
-        print('i:        ',result_itens[1][i])
         doc = read_sql_doc(int(result_itens[1][i]))
-        print('entrou!!!!', doc)
-
         name = doc['documment_name'].loc[0]
 
         cria_cotation(int(result_itens[0][1]), int(result_itens[0][2]), doc['id'].loc[0], name, doc['doc_type_id'].loc[0],doc['doc_type_page_id'].loc[0],doc['format_doc_id'].loc[0], date_today)

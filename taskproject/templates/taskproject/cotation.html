@@ -5,7 +5,7 @@
 <!-- Content -->
 <div id="content" class="flex">
         
-    <h1>Cotaçãso do Projeto</h1>
+    <h1><a href="{% url 'cotation-list' %}">Cotaçãso do Projeto</a></h1>
     
     <div id="content-main">
         <ul class="object-tools">
@@ -45,6 +45,16 @@
                     {% endfor %}
                    
                     </select></label>
+
+                    <label id="label-alinha">Filtro Disciplina: <select name="sub" required>
+                        <option value="" selected>---------</option>
+                        
+                        {% for sub in Subjects %}
+                            <option value={{sub.id}}>{{sub.subject_name}}</option>
+                        {% endfor %}
+                       
+                    </select></label>
+                    
                     <input type="hidden" name="select_across" value="0" class="select-across">
                     <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
                 </div>
