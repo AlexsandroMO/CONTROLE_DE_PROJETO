@@ -36,6 +36,12 @@ from django.test import TestCase
 #03001001213 - itau
 
 
+#pip install django-crispy-forms
+#{% load crispy_forms_tags %}
+
+
+
+
 
 '''
 from datetime import datetime
@@ -47,3 +53,15 @@ dF = datetime.strptime(data_final, "%Y-%m-%d")
 
 objs = Job.objects.filter(data_initial__gte=dI,data_final__lte=dF)'''
 
+
+#https://bootstrapious.com/tutorial/files/sidebar.zip       <<<  Donload de modelo de templte page
+#https://bootstrapious.com/p/bootstrap-sidebar
+
+
+
+
+# {% load static %}
+# {% block content %}{% endblock %}
+
+
+#https://pt.stackoverflow.com/questions/421135/como-fazer-redirect-na-p%C3%A1gina-com-django

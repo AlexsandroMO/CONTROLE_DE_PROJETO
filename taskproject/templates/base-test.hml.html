@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>Select action to change | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+
+  
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
+  
+  
+    <script src="/admin/jsi18n/"></script>
+  
+  
+  
+
+
+
+
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-taskproject model-action change-list"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>admin</strong>.
+            
+            
+                
+                    <a href="/">View site</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Change password</a> /
+                
+                <a href="/admin/logout/">Log out</a>
+            
+        </div>
+        
+        
+        
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="/admin/">Home</a>
+&rsaquo; <a href="/admin/taskproject/">Taskproject</a>
+&rsaquo; Actions
+</div>
+
+    
+
+    <div class="main shifted" id="main">
+      
+        
+          
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+<nav class="sticky" id="nav-sidebar">
+  
+
+
+  
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">Authentication and Authorization</a>
+        </caption>
+        
+          <tr class="model-group">
+            
+              <th scope="row"><a href="/admin/auth/group/">Groups</a></th>
+            
+
+            
+              <td><a href="/admin/auth/group/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-user">
+            
+              <th scope="row"><a href="/admin/auth/user/">Users</a></th>
+            
+
+            
+              <td><a href="/admin/auth/user/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+      </table>
+    </div>
+  
+    <div class="app-taskproject module current-app">
+      <table>
+        <caption>
+          <a href="/admin/taskproject/" class="section" title="Models in the Taskproject application">Taskproject</a>
+        </caption>
+        
+          <tr class="model-action current-model">
+            
+              <th scope="row"><a href="/admin/taskproject/action/" aria-current="page">Actions</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/action/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-cotation">
+            
+              <th scope="row"><a href="/admin/taskproject/cotation/">Cotations</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/cotation/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-doct">
+            
+              <th scope="row"><a href="/admin/taskproject/doct/">Doc ts</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/doct/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-documentstandard">
+            
+              <th scope="row"><a href="/admin/taskproject/documentstandard/">Document standards</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-employee">
+            
+              <th scope="row"><a href="/admin/taskproject/employee/">Employees</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/employee/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-myproject">
+            
+              <th scope="row"><a href="/admin/taskproject/myproject/">My projects</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/myproject/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-paget">
+            
+              <th scope="row"><a href="/admin/taskproject/paget/">Page ts</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/paget/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-pageformat">
+            
+              <th scope="row"><a href="/admin/taskproject/pageformat/">Pageformats</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/pageformat/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-projectvalue">
+            
+              <th scope="row"><a href="/admin/taskproject/projectvalue/">Project values</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/projectvalue/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-statusdoc">
+            
+              <th scope="row"><a href="/admin/taskproject/statusdoc/">Status docs</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/statusdoc/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-subject">
+            
+              <th scope="row"><a href="/admin/taskproject/subject/">Subjects</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/subject/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+          <tr class="model-upload">
+            
+              <th scope="row"><a href="/admin/taskproject/upload/">Uploads</a></th>
+            
+
+            
+              <td><a href="/admin/taskproject/upload/add/" class="addlink">Add</a></td>
+            
+
+            
+          </tr>
+        
+      </table>
+    </div>
+  
+
+
+</nav>
+
+        
+      
+  <div class="content">
+  <!-- Content -->
+  <div id="content" class="flex">
+      
+    
+    
+  </div>
+  </div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>

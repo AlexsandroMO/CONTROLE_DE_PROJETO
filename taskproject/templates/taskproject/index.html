@@ -1,160 +1,142 @@
 {% extends 'base.html' %}
 
-{% block title %}Pagina Inicial{% endblock %}
+{% block title %}Cotação{% endblock %}
 {% block content %}
+<!-- Content -->
 
- 
- <!-- Content -->
-<div id="content" class="colMS">        
-    <h1>Ambiente de Projetos</h1>
 
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="" class="section" title="Models in the Authentication and Authorization application">Projetos em Andamento</a>
-            </caption>
-            <th scope="row"><a href="{% url 'project-list' %}">Acessar</a></th>
-            <td><a href="{% url 'project-list' %}" class="changelink">Editar</a></td> <!--Implementar uma função para tirar o link qd for só acessar -->
-        </table>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+            
+          <div class="card-header">
+            <h3 class="card-title"><a href="{% url 'cotation-list' %}">Ambiente de Gerenciamento de Projetos</a></h3>
+          </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="" class="section" title="Models in the Authentication and Authorization application">Projetos em Andamento</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'project-list' %}">Acessar</a></th>
+                    <td><a href="{% url 'project-list' %}" class="changelink">Editar</a></td> <!--Implementar uma função para tirar o link qd for só acessar -->
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="#" class="section" title="Models in the Authentication and Authorization application">Documentação Técnica</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'documment-type-list' %}">Acessar</a></th>
+                    <td><a href="{%url 'admin:index'%}taskproject/documentstandard/" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="{% url 'subject-list' %}" class="section" title="Models in the Authentication and Authorization application">Disciplinas</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'subject-list' %}">Acessar</a></th>
+                    <td><a href="#" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="{% url 'action-list' %}" class="section" title="Models in the Authentication and Authorization application">Ações do Projeto</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'action-list' %}">Acessar</a></th>
+                    <td><a href="#" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="{% url 'status-list' %}" class="section" title="Models in the Authentication and Authorization application">Status do Projeto</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'status-list' %}">Acessar</a></th>
+                    <td><a href="#" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="{% url 'employee-list' %}" class="section" title="Models in the Authentication and Authorization application">Colaboradores</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'employee-list' %}">Acessar</a></th>
+                    <td><a href="#" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="{% url 'cotation-list' %}" class="section" title="Models in the Authentication and Authorization application">Cotação de Projeto</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'cotation-list' %}">Acessar</a></th>
+                    <td><a href="#" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="#" class="section" title="Models in the Authentication and Authorization application">Tipo de Folhas</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'page-t' %}">Acessar</a></th>
+                    <td><a href="{%url 'admin:index'%}taskproject/paget" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+            <div class="app-auth module current-app" id="alinha-tables">
+                <table>
+                    <caption id="width-caption">
+                        <a href="#" class="section" title="Models in the Authentication and Authorization application">Sigla de Documentos</a>
+                    </caption>
+                    <th scope="row"><a href="{% url 'doc-t' %}">Acessar</a></th>
+                    <td><a href="{%url 'admin:index'%}taskproject/doct" class="changelink">Editar</a></td>
+                </table>
+            </div>
+           
+           
+           <div class="app-auth module current-app" id="alinha-tables">
+            <table>
+                <caption id="width-caption">
+                    <a href="{% url 'admin:index' %}" class="section" title="Models in the Authentication and Authorization application">Upload Docs</a>
+                </caption>
+                <th scope="row"><a href="{%url 'admin:index'%}taskproject/upload">Acessar</a></th>
+                <td><a href="#" class="changelink">Editar</a></td>
+            </table>
+           </div>
+
+        </div>
+
+        </div>
+      </div>
     </div>
 
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="#" class="section" title="Models in the Authentication and Authorization application">Documentação Técnica</a>
-            </caption>
-            <th scope="row"><a href="{% url 'documment-type-list' %}">Acessar</a></th>
-            <td><a href="{%url 'admin:index'%}taskproject/documentstandard/" class="changelink">Editar</a></td>
-        </table>
-    </div>
+</section>
 
 
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="{% url 'subject-list' %}" class="section" title="Models in the Authentication and Authorization application">Disciplinas</a>
-            </caption>
-            <th scope="row"><a href="{% url 'subject-list' %}">Acessar</a></th>
-            <td><a href="#" class="changelink">Editar</a></td>
-        </table>
-    </div>
 
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="{% url 'action-list' %}" class="section" title="Models in the Authentication and Authorization application">Ações do Projeto</a>
-            </caption>
-            <th scope="row"><a href="{% url 'action-list' %}">Acessar</a></th>
-            <td><a href="#" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="{% url 'status-list' %}" class="section" title="Models in the Authentication and Authorization application">Status do Projeto</a>
-            </caption>
-            <th scope="row"><a href="{% url 'status-list' %}">Acessar</a></th>
-            <td><a href="#" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="{% url 'employee-list' %}" class="section" title="Models in the Authentication and Authorization application">Colaboradores</a>
-            </caption>
-            <th scope="row"><a href="{% url 'employee-list' %}">Acessar</a></th>
-            <td><a href="#" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="{% url 'cotation-list' %}" class="section" title="Models in the Authentication and Authorization application">Cotação de Projeto</a>
-            </caption>
-            <th scope="row"><a href="{% url 'cotation-list' %}">Acessar</a></th>
-            <td><a href="#" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="#" class="section" title="Models in the Authentication and Authorization application">Tipo de Folhas</a>
-            </caption>
-            <th scope="row"><a href="{% url 'page-t' %}">Acessar</a></th>
-            <td><a href="{%url 'admin:index'%}taskproject/paget" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <caption id="width-caption">
-                <a href="#" class="section" title="Models in the Authentication and Authorization application">Sigla de Documentos</a>
-            </caption>
-            <th scope="row"><a href="{% url 'doc-t' %}">Acessar</a></th>
-            <td><a href="{%url 'admin:index'%}taskproject/doct" class="changelink">Editar</a></td>
-        </table>
-    </div>
-
-    <div class="app-auth module current-app" id="alinha-tables">
-        <table>
-            <form action="{% url 'Create-cota' %}" method="get">
-            <caption id="width-caption" onclick="Mudarestado('cota_show')">
-                Carregar Planilhas
-            </caption>
-            <!-- <th scope="row"><a href="#" onclick="MessagesCarga()" id="call-pl">Carga Geral</a></th> -->
-            <td><a href="{%url 'admin:index'%}taskproject/projectvalue/" id="monetiza">Monetização de Custos</a></td> <!-- onclick="MessagesCotation()" -->
-            <td><button class="w3-btn w3-white w3-border w3-border-green w3-round-xlarge" type="submit" id="bt" name="cota">Carga Cotação</button></td>
-  
-        </table>
-
-        <div id="cota_show">
-  
-        <h3>Tipo de Orçamento</h3>
-        
-        <table>
-            <caption id="width-caption">
-                    <th scope="row">
-                        <div class="radio">
-                            <input type="radio" name="cota-radio" id="optionsRadio" value="option1"> <!-- checked> -->
-                            <label for="optionsRadiosBoa">HH</label>
-                        </div>
-                    </th>
-                    <th scope="row">
-                     
-                        <div class="radio">
-                            <input type="radio" name="cota-radio" id="optionsRadio" value="option2">
-                            <label for="optionsRadiosBoa">DOC</label>
-                        </div>
-                    </th>
-                    <th scope="row">
-                        <div class="radio">
-                            <input type="radio" name="cota-radio" id="optionsRadios" value="option3">
-                            <label for="optionsRadiosBoa">A1</label>
-                        </div>
-
-                    </th>
-
-                </form>
-        </caption>
-        </table>
-    </div>
-    </div>
-
-<div class="app-auth module current-app" id="alinha-tables">
-    <table>
-        <caption id="width-caption">
-            <a href="{% url 'admin:index' %}" class="section" title="Models in the Authentication and Authorization application">Upload Docs</a>
-        </caption>
-        <th scope="row"><a href="{%url 'admin:index'%}taskproject/upload">Acessar</a></th>
-        <td><a href="#" class="changelink">Editar</a></td>
-    </table>
-</div>
-
-
-    
 {% endblock %}
 
+
+
+
+ 
+ <!-- Content -->       
+ <h1>Ambiente de Projetos</h1>
+
+ 

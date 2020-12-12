@@ -1,112 +1,135 @@
 {% extends 'base.html' %}
-
 {% block title %}Cotação{% endblock %}
-{% block content %}
-<!-- Content -->
-<div id="content" class="flex">
-        
-    <h1><a href="{% url 'cotation-list' %}">Cotaçãso do Projeto</a></h1>
-    
-    <div id="content-main">
-        <ul class="object-tools">
-            <li>
-                <a href="#" class="addlink">
-                Cotação de Projeto
-                </a>
-            </li>
-        </ul>
 
-        <div class="module" id="changelist">
-            <div class="changelist-form-container">
+{% block content %}
+
+<!-- Content -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+
+          <div class="card-header">
+            <h3 class="card-title"><a href="{% url 'cotation-list' %}">Cotaçãso de Projetos</a></h3>
+          </div>
+
+
+          
+        <div class="card-body">
                 <form action="{% url 'cotation-list' %}" method="GET" id="changelist-form" novalidate>
                 <!-- Caixa de seleção - CheckBox -->
-                <div class="actions">
-                    <label>Action: <select name="action" required>
-                    <option value="" selected>---------</option>
-                    <option value="delete_selected">Delete</option>
-                    </select></label>
-                    <input type="hidden" name="select_across" value="0" class="select-across">
-                    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
-                   
-                    <label id="label-alinha">Base de Calculo do Projeto: <select name="cota" required>
-                    <option value="" selected>---------</option>
-                    <option value="option1">HH</option>
-                    <option value="option2">DOC</option>
-                    <option value="option3">A1</option>
-                    </select></label>
-                    <input type="hidden" name="select_across" value="0" class="select-across">
-                    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+                <div class="actions" >
+                    <label><select class="form-control" name="action" required>
+                        <option value="" selected>---------</option>
+                        <option value="delete_selected">Delete</option>
+                        </select></label>
 
-                    <label id="label-alinha">Filtro Projeto: <select name="proj" required>
+                        <button type="submit" class="btn btn-secondary" title="Run the selected action" name="index" value="0">Ação</button>
+
+                    <label><select class="form-control" name="cota" required>
+                        <option value="" selected>---------</option>
+                        <option value="option1">HH</option>
+                        <option value="option2">DOC</option>
+                        <option value="option3">A1</option>
+                        </select></label>
+                        
+                    <button type="submit" class="btn btn-secondary" title="Run the selected action" name="index" value="0">Cotar</button>
+                    <label id="espacamento">&nbsp;</label>
+                    <label><select class="form-control" name="proj" required>
                     <option value="" selected>---------</option>
                     
                     {% for proj in MyProjects %}
                         <option value={{proj.id}}>{{proj.project_name}}</option>
                     {% endfor %}
-                   
+                    
                     </select></label>
 
-                    <label id="label-alinha">Filtro Disciplina: <select name="sub" required>
+                    <label><select class="form-control" name="sub" required>
                         <option value="" selected>---------</option>
                         
                         {% for sub in Subjects %}
                             <option value={{sub.id}}>{{sub.subject_name}}</option>
                         {% endfor %}
-                       
+                        
                     </select></label>
-                    
-                    <input type="hidden" name="select_across" value="0" class="select-across">
-                    <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go</button>
+        
+                    <button type="submit" class="btn btn-secondary" title="Run the selected action" name="index" value="0">Filtrar Projeto</button>
                 </div>
-
-                <!-- Lista de Iten das Tabelas -->
-                <div class="results">
-                    <table id="result_list">
-                    <thead>
-                        <tr>
-                            <th scope="col"  class="action-checkbox-column">
-                                <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                                <div class="clear"></div>
-                            </th>
-                            {% for col in cols %}
-                            <th scope="col"  class="column-__str__">
-                                <div class="text"><a href="?o=2">{{ col }}</a></div>
-                                <div class="clear"></div>
-                            </th>
-                            {% endfor %}
-    
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% csrf_token %}
-                        {% for cota in Cotations %}
-                            <tr>
-                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1" class="action-select"></td>
-                                <th class="field-project_name"><a href="http://127.0.0.1:8000/edite_cotation/{{cota.id}}">{{cota.proj_name}}</a></th>
-                                <td class="field-comments">{{cota.subject_name}}</td>
-                                <td class="field-comments">{{cota.doc_name_pattern}}</td>
-                                <td class="field-comments">{{cota.doc_name}}</td>
-                                <td class="field-comments">{{cota.cod_doc_type}}</td>
-                                <td class="field-comments">{{cota.format_doc}}</td>
-                                <td class="field-comments">{{cota.page_type}}</td>
-                                <td class="field-comments">{{cota.qt_page}}</td>
-                                <td class="field-comments">{{cota.qt_hh}}</td>
-                                <td class="field-comments">{{cota.cost_doc}}</td>
-                                <td class="field-comments">{{cota.update_ct}}</td>
-                                
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                    </table>
-                </div>
-
-                <p class="paginator">3 document standards</p>
-
-            </form>
+ 
+         <div id="ajusta-tabela"> <!-- class="card-body table-responsive p-0"
+           -->
+          <table id="example3" class="table table-bordered table-hover"> <!-- class="table table-bordered table-striped" -->
+              <thead>
+                <tr name="selected">
+                <th scope="col"  class="action-checkbox-column">
+                    <div class="text"><span><input type="checkbox" name="_selected" value="All" id="action-toggle"></span></div>
+                    <div class="clear"></div>
+                </th>
+                <th style="width: 5000px;">AÇÃO</th>
+<!--                 {% for col in cols %}
+                <th scope="col"  class="column-__str__">
+                    <div class="text"><a href="X">{{ col }}</a></div>
+                    <div class="clear"></div>
+                </th>
+                {% endfor %}
+                </tr> -->
+              </thead>
+              <tbody>
+                {% csrf_token %}
+                {% for cota in Cotations %}
+                <tr>
+                    <td id="width-col0" class="action-checkbox"><input type="checkbox" name="_selected_action" value={{cota.id}} class="action-select"></td>
+                    <th class="field-project_name"><a href="http://127.0.0.1:8000/edite_cotation/{{cota.id}}">{{cota.proj_name}}</a></th>
+                    <td id="width-col2">{{cota.subject_name}}</td>
+                    <td id="width-col2">{{cota.doc_name_pattern}}</td>
+                    <td id="width-col2">{{cota.doc_name}}</td>
+                    <td id="width-col3">{{cota.cod_doc_type}}</td>
+                    <td id="width-col3">{{cota.format_doc}}</td>
+                    <td id="width-col3">{{cota.page_type}}</td>
+                    <td id="width-col3">{{cota.qt_page}}</td>
+                    <td id="width-col3">{{cota.qt_hh}}</td>
+                    <td id="width-col3">{{cota.cost_doc}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tfoot>
+              <tr>
+                <th></th>
+                <th>Custo Total</th>
+                <th colspan="8"></th>
+                <th>20.500,00</th>
+  
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+ <!--            <div class="row"><div class="col-sm-12 col-md-5">
+                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Mostrando {{ Cotations.number }} de {{ Cotations.paginator.num_pages }} Listas</div>
+            </div> -->
+            
+<!--             <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                <ul class="pagination">
+                    {% if Cotations.has_previous %}
+                      <li class="paginate_button page-item previous" id="example1_previous"><a href="?page={{ Cotations.previous_page_number }}" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                      <li class="paginate_button page-item next disabled" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                    {% endif %}
+     
+                    {% if Cotations.has_next %}
+                      <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                      <li class="paginate_button page-item next" id="example1_next"><a href="?page={{ Cotations.next_page_number }}" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+      
+        </div> -->
+       
         </div>
-
+      </div>
     </div>
-</div>
+    
+  </section>
 
 {% endblock %}
 

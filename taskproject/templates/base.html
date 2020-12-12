@@ -1,142 +1,179 @@
 {% load static %}
 
 <!DOCTYPE html>
+<html>
 
-<html lang="en-us" >
 <head>
-<title>Select my project to change | Django site admin</title>
-<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
-  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+    <title>Controle de Projeto</title>
 
-  <link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css">
-  
-  <script src="/admin/jsi18n/"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'css/mystyles.css' %}">
 
-<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
-<script src="/static/admin/js/jquery.init.js"></script>
-<script src="/static/admin/js/core.js"></script>
-<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
-<script src="/static/admin/js/actions.js"></script>
-<script src="/static/admin/js/urlify.js"></script>
-<script src="/static/admin/js/prepopulate.js"></script>
-<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <link rel="stylesheet" href="{% static 'css/changelist.css' %}">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!-- Admin -->
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/admin/js/jquery.init.js"></script>
+    <script src="/static/admin/js/core.js"></script>
+    <script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script src="/static/admin/js/actions.js"></script>
+    <script src="/static/admin/js/urlify.js"></script>
+    <script src="/static/admin/js/prepopulate.js"></script>
+    <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
 
 
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
     
-    <!-- W3s -->
-    <!-- <link rel="stylesheet" href="mystyle.css"> -->
-    <!-- My CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
 
-<meta name="robots" content="NONE,NOARCHIVE">
+
 </head>
 
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>CONTROLE DE PROJETOS</h3>
+            </div>
 
-<body class=" app-taskproject model-myproject change-list"
-  data-admin-utc-offset="0">
+            <ul class="list-unstyled components">
+                <p>Documentação Técnica</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/">Administração de Projetos</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="{% url 'documment-type-list' %}">Contact</a>
+                </li>
+            </ul>
 
-<body class=" app-taskproject model-documentstandard change-list" data-admin-utc-offset="0">
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="#" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="#" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
 
-<!-- Container -->
-<div id="container">
-    <!-- Header -->
-    <div id="header">
-      <div id="branding">
-        <h1 id="site-name"><a href="/">Gerenciador de Projetos</a></h1>
-      </div>
-      <div id="user-tools">
-        Welcome,
-        <strong>admin</strong>.
-        <a href="/">View site</a> /
-        <a href="/admin/password_change/">Change password</a> /
-        <a href="/admin/logout/">Log out</a>
-      </div>
-    </div>
-<!-- END Header -->
+        <!-- Page Content  -->
+        <div id="content">
 
-<div class="breadcrumbs">
-<a href="/">Home</a>
-&rsaquo; <a href="/">Taskproject</a>
-&rsaquo; Document standards
-</div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
 
-<div class="main shifted" id="main">      
+                <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="ChamaAdmin('sidebar')">
+                    <i class="fas fa-align-left" ></i>
+                    <!-- <span>Área Administrativa</span> -->
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'documment-type-list' %}">Documentos de Projeto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'cotation-list' %}">Cotação de Projetos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
           
-<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
-<nav class="sticky" id="nav-sidebar">
+            <!-- /.content-wrapper -->
+            {% block content %}{% endblock %}
 
-    <!-- Barra laetral -->
-    <div class="app-auth module">
-      <table>
-        <caption>
-          <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">PROJETOS</a>
-        </caption>
-          <tr class="model-group">
-              <th scope="row"><a href="{% url 'project-list' %}">Configuração de Projetos</a></th>
-              <td><a href="#" class="addlink">Add</a></td>
-          </tr>
-          <tr class="model-user">   
-              <th scope="row"><a href="{% url 'documment-type-list' %}">Projetos em Andamento</a></th>
-              <td><a href="#" class="addlink">Editar</a></td>
-          </tr>
-          <tr class="model-user">
-            <th scope="row"><a href="{% url 'subject-list' %}">Projetos em Finalizados</a></th>
-            <td><a href="#" class="addlink">Editar</a></td>
-        </tr>
-        
-      </table>
-    </div>
-  
-    <div class="app-taskproject module current-app">
-      <table>
-        <caption>
-          <a href="/admin/taskproject/" class="section" title="Models in the Taskproject application">Ambiente Admin</a>
-        </caption>
-        
-<!--           <tr class="model-documentstandard current-model"> 
-              <th scope="row"><a href="/typeDocuments" aria-current="page">Configurações</a></th>
-              <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
-          </tr>
-          <tr class="model-documentstandard current-model"> 
-            <th scope="row"><a href="/typeDocuments" aria-current="page">Banco de Dados</a></th>
-            <td><a href="/admin/taskproject/documentstandard/add/" class="addlink">Add</a></td>
-          </tr>
-        -->
-        <!-- <th scope="row"><a href="admin/">Configurações</a></th> -->
-          <tr class="model-subject">
-              <th scope="row"><a href="admin/">Configurações</a></th>
-              <td><a href="/admin/taskproject/subject/add/" class="addlink">Add</a></td>
-          </tr>
-          <tr class="model-subject">
-            <th scope="row"><a href="#">Banco de Dados</a></th>
-            <td><a href="#" class="addlink">Add</a></td>
-          </tr>
-        
-      </table>
-    </div>
-
-</nav>
+        </div>
+      </div>
+            
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.0.0
+        </div>
+        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+        reserved.
+      </footer>
 
 
-<div class="content">
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-{% block content %}{% endblock %}
-   
-<br class="clear">
-</div>
+    <!-- My JS -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/adminlist.js' %}"></script>
+    
 
-<!-- END Content -->
-    <div id="footer"></div>
-    </div>
-    </div>
-</div>
-<!-- END Container -->
+    
+
+    <!-- <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                //$('#sidebar').removeClass('active');
+                
+            });
+        });
+      </script> -->
+
+
 </body>
-
-<script src="{% static 'js/scripts.js' %}"></script>
 
 </html>
